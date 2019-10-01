@@ -1,8 +1,12 @@
 import React from 'react';
+import {CompetitionManager} from './components/CompetitionManager';
+
+import './styles.scss';
+import '@fortawesome/fontawesome-free/css/all.css'
 
 function App() {
   return (
-      <h1>Math Competition</h1>
+      <CompetitionManager />
   );
 }
 

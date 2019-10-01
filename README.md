@@ -1,68 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Introduction
+- Redux is a `state management tool` for JavaScript applications.
+- `main concept`: the entire state of an application is stored in one central location
+- `Actions & Reducer & State` concept
 
-## Available Scripts
+# Live coding
+- `React + Redux`
 
-In the project directory, you can run:
+## Without redux
 
-### `npm start`
+### Challanges: 
+- React docs encourage you to `lift state up`, which means putting the data in the nearest ancestor of the two components.
+- the `nearest ancestor` component might be at the top level of the component tree and would have to pass the data down as `props`
+- makes it harder to move components around because there is a `coupling`
+- could be a `performance` issue since every update to the data would cause all the children to re-render
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## With redux
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### React design
+Redux offers a tradeoff. It asks you to:
+- Describe application state as plain objects and arrays.
+- Describe changes in the system as plain objects.
+- Describe the logic for handling changes as pure function
 
-### `npm test`
+### Live code
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### What we acheived
+- each component of an application can have `direct access to the state` of the application 
+- no need for sending props down to child components or using `callback functions` to send data back up to a parent.
+- removes `coupling` between components
+- improves `performance` as the data no longer has to be passed down through multiple levels of components and cause re-rendering
+- `redictable state updates` make it easier to understand how the data flow works in the application
+- `pure reducer functions` makes logic easier to test, and enables useful features like `time-travel debugging`
+- `centralizing the state` makes it easier to implement things like logging changes to the data, or persisting data between page refreshes
 
-### `npm run build`
+## What can be acheived thanks to Redux
+- see: https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## So do you not need it or not?
+In a `small application` you can find that
+- there are few `parent-child` relationships, and
+- sharing of the `same data` is not widely used among different components
+So using `local state` in those cases is equally fine.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+But in a `large application` keeping the similar structure would bring the following disadvantages —
+- When two components would require a common data you have to move that data to closest ancestor.
+- if you just make an ancestor component for the sole purpose of passing the data, there would be no proper relationship in the application structure.
+- whenever you will face a bug, you will be having a hard time debugging it
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## So should I keep all application data in Redux?
+- no! consider keeping all User Interface (UI) related data and data not needed in more than one component in local state.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# Others
+- good for plain `JavaScript`(Selfridges: CogJs, Redux + Reselect + Thunk)
