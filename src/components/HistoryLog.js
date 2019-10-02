@@ -1,12 +1,14 @@
 import React from 'react';
-import {HistoryLogItem} from './HistoryLogItem';
+import { HistoryLogItem } from './HistoryLogItem';
+import { useSelector } from 'react-redux';
 
-export function HistoryLog({history, onDelete}) {
+export function HistoryLog() {
+    const history = useSelector(state => state.answers);
 
     return (
         <div className="history-log">
             <h3>Log</h3>
-            {history.map(item => <HistoryLogItem key={item.id} item={item} onDelete={onDelete}/>)}
+            {history.map(item => <HistoryLogItem key={item.id} item={item}/>)}
         </div>
     );
 }

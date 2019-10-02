@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as actions from '../store/actions';
 
 const generator = competitionGenerator();
 
-export function Competition({onAnswer}) {
+export function Competition() {
 
+    const dispatch = useDispatch();
     const [data, setData] = useState(generator.next().value);
     const [disabled, setDisabled] = useState(false);
 
     const submit = e => {
-        if(e.key === 'Enter' && e.target.value !== '') {
-            onAnswer({...data, answer: parseInt(e.target.value, 10)});
+        if (e.key === 'Enter' && e.target.value !== '') {
+            dispatch(actions.addAnswer({...data, answer: parseInt(e.target.value, 10)}));
             setData(generator.next().value);
             e.target.value = '';
             setDisabled(false);
@@ -30,7 +33,7 @@ export function Competition({onAnswer}) {
 function* competitionGenerator() {
     const operators = ['+', '-', '*'];
     const rand = max => ~~(Math.random() * max);
-    while(true) {
+    while (true) {
         yield {
             id: Date.now(),
             a: rand(10),

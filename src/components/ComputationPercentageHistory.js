@@ -1,11 +1,10 @@
 import React from 'react';
-import {isCorrect} from '../services/competitionHelper';
-import {PercentageTotalHistory} from './PercentageTotalResult';
+import { PercentageTotalHistory } from './PercentageTotalResult';
+import { useSelector } from 'react-redux';
 
+export function ComputationPercentageHistory() {
 
-
-export function ComputationPercentageHistory({ answers }) {
-
+    const answers = useSelector(state => state.answers);
     const filterBy = op => answers.filter(item => item.operator === op);
 
     const total = filterBy('+');

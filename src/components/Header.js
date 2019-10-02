@@ -2,12 +2,12 @@ import React from 'react';
 import {Logo} from './Logo';
 import {TotalResults} from './TotalResults';
 
-export function Header({ answers }) {
+export function Header() {
 
     return (
         <div className="header">
             <Logo/>
-            <TotalResults answers={answers}/>
+            <TotalResults/>
         </div>
     );
 }
