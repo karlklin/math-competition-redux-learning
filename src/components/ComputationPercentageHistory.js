@@ -13,10 +13,10 @@ export function ComputationPercentageHistory({ answers }) {
     const product = filterBy('*');
 
     return (
-        <div>
-            <div>Adding: <PercentageTotalHistory answers={total}/></div>
-            <div>Substracting: <PercentageTotalHistory answers={difference}/></div>
-            <div>Multiplication: <PercentageTotalHistory answers={product}/></div>
-        </div>
+        <>
+            <div className="adding">Adding: <PercentageTotalHistory answers={total}/></div>
+            <div className="substracting">Substracting: <PercentageTotalHistory answers={difference}/></div>
+            <div className="multiplication">Multiplication: <PercentageTotalHistory answers={product}/></div>
+        </>
     );
 }

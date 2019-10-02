@@ -6,10 +6,10 @@ export function PercentageHistory({answers}) {
 
     return (
         <div className="percentage-history">
-            <div>
+            <div className="percentage-total">
                 <PercentageTotalHistory answers={answers}/>
             </div>
-            <div>
+            <div className="percentage-partial">
                 <ComputationPercentageHistory answers={answers}/>
             </div>
         </div>

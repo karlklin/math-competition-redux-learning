@@ -12,6 +12,6 @@ export function PercentageTotalHistory({ answers }) {
     const result = Math.floor(correctAnswers * 100 / allAnswers);
 
     return (
-        <span>{result} % good answers</span>
+        <span>{result} %</span>
     );
 }

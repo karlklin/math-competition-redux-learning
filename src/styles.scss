@@ -19,7 +19,7 @@ body {
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 100px auto 100px;
+  grid-template-rows: 100px auto 200px;
   grid-template-areas:
     'header header log'
     'competition competition log'
@@ -58,6 +58,10 @@ body {
   font-size: 60px;
   margin: auto 0;
 
+  * {
+    margin: 5px;
+  }
+
   input {
     font-size: 60px;
     width: 100px;
@@ -71,18 +75,25 @@ body {
 }
 
 .history-log {
+  border-left: 1px solid #000000;
+  padding-left: 20px;
+
   .history-log-item {
     font-size: 20px;
     margin: 5px 0;
     span {
       margin: 5px;
     }
+    .fas {
+      font-size: 16px;
+      margin-right: 10px;
+    }
   }
 }
 
 .header {
   display: grid;
-  padding: 0 100px 0 0;
+  padding: 20px;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
     'logo . . . . total'
@@ -90,16 +101,35 @@ body {
 
   .total-result {
     grid-area: total;
-    padding: 10px;
-    line-height: 80px;
+    line-height: 60px;
     font-size: 40px;
     text-align: right;
   }
   .logo {
     grid-area: logo;
-    padding: 10px;
-    line-height: 80px;
-    font-size: 80px;
+    line-height: 60px;
+    font-size: 60px;
     text-align: center;
+  }
+}
+
+.percentage-history {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'total partial'
+  ;
+  padding: 20px;
+  line-height: 160px;
+  font-size: 40px;
+  text-align: center;
+
+  .percentage-total { grid-area: total; }
+  .percentage-partial {
+    grid-area: partial;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: right;
+    margin: auto 0;
   }
 }
