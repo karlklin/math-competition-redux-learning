@@ -1,5 +1,4 @@
 import React from 'react';
-import {isCorrect} from '../services/competitionHelper';
 import {PercentageTotalHistory} from './PercentageTotalResult';
 
 

@@ -1,5 +1,11 @@
+const operationsDict = {
+    '+': (a, b) => a + b,
+    '-': (a, b) => a - b,
+    '*': (a, b) => a * b,
+}
+
 export function correctAnswer(item) {
-    return eval(`${item.a}${item.operator}${item.b}`);
+    return operationsDict[item.operator](item.a, item.b);
 }
 
 export function isCorrect(item) {

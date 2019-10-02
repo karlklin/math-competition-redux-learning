@@ -12,8 +12,6 @@ export function CompetitionManager() {
         { id: 3, a: 5, b: 10, operator: '*', answer: 10 },
     ]);
 
-    console.log(answers);
-
     return (
         <div className="container">
             <Header answers={answers}/>
