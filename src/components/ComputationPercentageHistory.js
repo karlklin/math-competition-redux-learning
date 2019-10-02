@@ -1,10 +1,7 @@
 import React from 'react';
-import { PercentageTotalHistory } from './PercentageTotalResult';
-import { useSelector } from 'react-redux';
+import { PercentageTotalResult } from './PercentageTotalResult';
 
-export function ComputationPercentageHistory() {
-
-    const answers = useSelector(state => state.answers);
+export function ComputationPercentageHistory({answers}) {
     const filterBy = op => answers.filter(item => item.operator === op);
 
     const total = filterBy('+');
@@ -13,9 +10,9 @@ export function ComputationPercentageHistory() {
 
     return (
         <>
-            <div className="adding">Adding: <PercentageTotalHistory answers={total}/></div>
-            <div className="substracting">Substracting: <PercentageTotalHistory answers={difference}/></div>
-            <div className="multiplication">Multiplication: <PercentageTotalHistory answers={product}/></div>
+            <div className="adding">Adding: <PercentageTotalResult answers={total}/></div>
+            <div className="substracting">Substracting: <PercentageTotalResult answers={difference}/></div>
+            <div className="multiplication">Multiplication: <PercentageTotalResult answers={product}/></div>
         </>
     );
 }
