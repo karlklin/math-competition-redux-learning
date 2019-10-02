@@ -22,6 +22,9 @@ Redux offers a tradeoff. It asks you to:
 - Describe changes in the system as plain objects.
 - Describe the logic for handling changes as pure function
 
+3 React patterns:
+https://redux.js.org/introduction/three-principles
+
 ### Live code
 
 ### What we acheived

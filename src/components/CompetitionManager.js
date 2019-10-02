@@ -25,8 +25,8 @@ export function CompetitionManager() {
 }
 
 const useAnswers = (initial = []) => {
-    const [answers, setAnswers] = useState(initial)
+    const [answers, setAnswers] = useState(initial);
     const addAnswer = answer => setAnswers([...answers, answer]);
     const deleteAnswer = id => setAnswers(answers.filter(item => item.id !== id));
     return [answers, addAnswer, deleteAnswer];
-}
+};
