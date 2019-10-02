@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import {Header} from './Header';
-import {Competition} from './Competition';
-import {PercentageHistory} from './PercentageHistory';
-import {HistoryLog} from './HistoryLog';
+import { Header } from './Header';
+import { Competition } from './Competition';
+import { PercentageHistory } from './PercentageHistory';
+import { HistoryLog } from './HistoryLog';
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from '../store/actions';
 
 export function CompetitionManager() {
 
-    const [answers, addAnswer, deleteAnswer] = useAnswers([
-        { id: 1, a: 5, b: 10, operator: '+', answer: 15 },
-        { id: 2, a: 5, b: 10, operator: '-', answer: 10 },
-        { id: 3, a: 5, b: 10, operator: '*', answer: 10 },
-    ]);
+    const [answers, addAnswer, deleteAnswer] = useAnswers();
 
     console.log(answers);
 
@@ -24,9 +22,10 @@ export function CompetitionManager() {
     );
 }
 
-const useAnswers = (initial = []) => {
-    const [answers, setAnswers] = useState(initial)
-    const addAnswer = answer => setAnswers([...answers, answer]);
-    const deleteAnswer = id => setAnswers(answers.filter(item => item.id !== id));
+const useAnswers = () => {
+    const answers = useSelector(state => state.answers);
+    const dispatch = useDispatch();
+    const addAnswer = answer => dispatch(actions.addAnswer(answer));
+    const deleteAnswer = id => dispatch(actions.deleteAnswer(id));
     return [answers, addAnswer, deleteAnswer];
 }
