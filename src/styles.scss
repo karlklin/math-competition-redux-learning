@@ -3,6 +3,12 @@ body {
   padding: 0;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .container {
   position: fixed;
   height: 100%;
@@ -51,6 +57,20 @@ body {
       display: inline;
     }
   }
+
+  .editor {
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, .2);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    &.opened {
+      display: block;
+    }
+
+  }
 }
 
 .competition {
@@ -67,11 +87,6 @@ body {
     width: 100px;
     text-align: center;
   }
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-     -webkit-appearance: none;
-     margin: 0;
-   }
 }
 
 .history-log {
@@ -84,9 +99,14 @@ body {
     span {
       margin: 5px;
     }
+    input[type=number] {
+      width: 20px;
+    }
     .fas {
       font-size: 16px;
       margin-right: 10px;
+      display: inline-block;
+      width: 16px;
     }
   }
 }
@@ -111,6 +131,14 @@ body {
     font-size: 60px;
     text-align: center;
   }
+}
+
+.animating {
+  animation:3s rotateRight infinite linear;
+}
+
+@keyframes rotateRight{
+  100%{ transform:rotate(360deg); }
 }
 
 .percentage-history {
