@@ -8,7 +8,7 @@
 
 ## Without redux
 
-### Challanges: 
+### Challenges: 
 - React docs encourage you to `lift state up`, which means putting the data in the nearest ancestor of the two components.
 - the `nearest ancestor` component might be at the top level of the component tree and would have to pass the data down as `props`
 - makes it harder to move components around because there is a `coupling`
@@ -17,14 +17,21 @@
 ## With redux
 
 ### React design
-Redux offers a tradeoff. It asks you to:
+Redux offers a trade-off. It asks you to:
 - Describe application state as plain objects and arrays.
 - Describe changes in the system as plain objects.
 - Describe the logic for handling changes as pure function
 
 ### Live code
+1. Store setup (?): empty store in dev tools
+2. Initial state + actions
+3. CompetitionManager: internal state => store
+4. Component by component (caution: ComputationPercentageHistory needs to pass data)
+5. Fix HistoryLog update bug
+6. Reducer: use lens
+7. Optional: flat state
 
-### What we acheived
+### What we achieved
 - each component of an application can have `direct access to the state` of the application 
 - no need for sending props down to child components or using `callback functions` to send data back up to a parent.
 - removes `coupling` between components
@@ -33,7 +40,7 @@ Redux offers a tradeoff. It asks you to:
 - `pure reducer functions` makes logic easier to test, and enables useful features like `time-travel debugging`
 - `centralizing the state` makes it easier to implement things like logging changes to the data, or persisting data between page refreshes
 
-## What can be acheived thanks to Redux
+## What can be achieved thanks to Redux
 - see: https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367
 
 ## So do you not need it or not?
