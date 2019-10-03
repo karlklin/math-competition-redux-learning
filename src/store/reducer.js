@@ -14,13 +14,23 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 answers: [...state.answers, action.payload]
-            }
+            };
         }
         case (actions.DELETE_ANSWER): {
             return {
                 ...state,
                 answers: state.answers.filter(answer => answer.id !== action.payload)
-            }
+            };
+        }
+        case (actions.UPDATE_ANSWER): {
+            const { id, answer } = action.payload;
+            return {
+                ...state,
+                answers: state.answers.map(currentAnswer => currentAnswer.id !== id
+                    ? ({...currentAnswer})
+                    : ({...currentAnswer, answer })
+                )
+            };
         }
         default: return state;
     }

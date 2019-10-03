@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { correctAnswer, isCorrect } from '../services/competitionHelper';
 import { useDispatch } from 'react-redux';
 import * as actions from '../store/actions';
+import { updateAnswer } from '../store/actions';
 
 export function HistoryLogItem({item}) {
     const dispatch = useDispatch();
@@ -10,7 +11,7 @@ export function HistoryLogItem({item}) {
     const newValue = useRef(item.answer);
 
     const update = () => {
-        item.answer = parseInt(newValue.current.value);
+        dispatch(updateAnswer(item.id, parseInt(newValue.current.value)))
         toggleEditor();
     };
 
@@ -26,7 +27,6 @@ export function HistoryLogItem({item}) {
     return (
         <div className={correct ? 'history-log-item correct' : 'history-log-item wrong'}>
             <i className="fas fa-trash" onClick={() => dispatch(actions.deleteAnswer(item.id))}></i>
-            <i className="fas fa-trash" onClick={() => onDelete(item.id)}></i>
             { isToEdit ? <i className="fas fa-edit" onClick={toggleEditor}></i> : null }
             { correct ? <i className="fas"></i> : null }
             { isInEdit ? <i className="fas fa-check" onClick={update}></i> : null }
