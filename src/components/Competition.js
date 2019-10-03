@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 const generator = competitionGenerator();
 
-export function Competition({onAnswer}) {
+export function Competition({ onAnswer, initial }) {
 
-    const [data, setData] = useState(generator.next().value);
+    const [data, setData] = useState(initial || generator.next().value);
 
     const submit = e => {
         if(e.key === 'Enter' && e.target.value !== '') {
