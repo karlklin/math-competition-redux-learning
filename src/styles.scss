@@ -1,0 +1,163 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+
+  .header { grid-area: header }
+  .competition { grid-area: competition }
+  .percentage-history { grid-area: history }
+  .history-log { grid-area: log }
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 100px auto 200px;
+  grid-template-areas:
+    'header header log'
+    'competition competition log'
+    'history history log'
+  ;
+}
+
+.history-log {
+  .answer {
+
+  }
+  .correct-answer {
+    color: #388E3C;
+  }
+
+  .correct {
+    .answer {
+      display: inline;
+    }
+    .correct-answer {
+      display: none;
+    }
+  }
+  .wrong {
+    .answer {
+      color: #E64A19;
+    }
+    .correct-answer {
+      display: inline;
+    }
+  }
+
+  .editor {
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, .2);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    &.opened {
+      display: block;
+    }
+
+  }
+}
+
+.competition {
+  text-align: center;
+  font-size: 60px;
+  margin: auto 0;
+
+  * {
+    margin: 5px;
+  }
+
+  input {
+    font-size: 60px;
+    width: 100px;
+    text-align: center;
+  }
+}
+
+.history-log {
+  border-left: 1px solid #000000;
+  padding-left: 20px;
+
+  .history-log-item {
+    font-size: 20px;
+    margin: 5px 0;
+    span {
+      margin: 5px;
+    }
+    input[type=number] {
+      width: 20px;
+    }
+    .fas {
+      font-size: 16px;
+      margin-right: 10px;
+      display: inline-block;
+      width: 16px;
+    }
+  }
+}
+
+.header {
+  display: grid;
+  padding: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas:
+    'logo . . . . total'
+  ;
+
+  .total-result {
+    grid-area: total;
+    line-height: 60px;
+    font-size: 40px;
+    text-align: right;
+  }
+  .logo {
+    grid-area: logo;
+    line-height: 60px;
+    font-size: 60px;
+    text-align: center;
+  }
+}
+
+.animating {
+  animation:3s rotateRight infinite linear;
+}
+
+@keyframes rotateRight{
+  100%{ transform:rotate(360deg); }
+}
+
+.percentage-history {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'total partial'
+  ;
+  padding: 20px;
+  line-height: 160px;
+  font-size: 40px;
+  text-align: center;
+
+  .percentage-total { grid-area: total; }
+  .percentage-partial {
+    grid-area: partial;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: right;
+    margin: auto 0;
+  }
+}
