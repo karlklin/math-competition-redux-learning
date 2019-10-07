@@ -10,19 +10,17 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case (actions.ADD_ANSWER): {
+        case (actions.ADD_ANSWER):
             return {
                 ...state,
                 answers: [...state.answers, action.payload]
             };
-        }
-        case (actions.DELETE_ANSWER): {
+        case (actions.DELETE_ANSWER):
             return {
                 ...state,
                 answers: state.answers.filter(answer => answer.id !== action.payload)
             };
-        }
-        case (actions.UPDATE_ANSWER): {
+        case (actions.UPDATE_ANSWER):
             const { id, answer } = action.payload;
             return {
                 ...state,
@@ -31,7 +29,6 @@ const reducer = (state = initialState, action) => {
                     : ({...currentAnswer, answer })
                 )
             };
-        }
         default: return state;
     }
 };
