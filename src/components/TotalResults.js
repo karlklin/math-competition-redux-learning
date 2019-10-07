@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 export function TotalResults() {
 
-    const answers = useSelector(state => state.answers);
+    const answers = useSelector(state => Object.values(state.answers));
     const correct = answers.filter(isCorrect).length;
     const total = answers.length;
 

@@ -4,7 +4,7 @@ import { ComputationPercentageHistory } from './ComputationPercentageHistory';
 import { useSelector } from 'react-redux';
 
 export function PercentageHistory() {
-    const answers = useSelector(state => state.answers);
+    const answers = useSelector(state => Object.values(state.answers));
     return (
         <div className="percentage-history">
             <div className="percentage-total">

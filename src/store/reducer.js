@@ -1,11 +1,11 @@
 import * as actions from './actions';
 
 const initialState = {
-    answers: [
-        {id: 1, a: 5, b: 10, operator: '+', answer: 15},
-        {id: 2, a: 5, b: 10, operator: '-', answer: 10},
-        {id: 3, a: 5, b: 10, operator: '*', answer: 10}
-    ]
+    answers: {
+        1: {id: 1, a: 5, b: 10, operator: '+', answer: 15},
+        2: {id: 2, a: 5, b: 10, operator: '-', answer: 10},
+        3: {id: 3, a: 5, b: 10, operator: '*', answer: 10}
+    }
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,21 +13,32 @@ const reducer = (state = initialState, action) => {
         case (actions.ADD_ANSWER):
             return {
                 ...state,
-                answers: [...state.answers, action.payload]
+                answers: {
+                    ...state.answers,
+                    [action.payload.id]: action.payload
+                }
             };
         case (actions.DELETE_ANSWER):
+            const withoutProperty = (prop, obj) => {
+                const newObject = {...obj};
+                delete newObject[prop];
+                return newObject;
+            };
             return {
                 ...state,
-                answers: state.answers.filter(answer => answer.id !== action.payload)
+                answers: withoutProperty(action.payload, state.answers)
             };
         case (actions.UPDATE_ANSWER):
             const { id, answer } = action.payload;
             return {
                 ...state,
-                answers: state.answers.map(currentAnswer => currentAnswer.id !== id
-                    ? ({...currentAnswer})
-                    : ({...currentAnswer, answer })
-                )
+                answers: {
+                    ...state.answers,
+                    [id]: {
+                        ...state.answers[id],
+                        answer
+                    }
+                }
             };
         default: return state;
     }
