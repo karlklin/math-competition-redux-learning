@@ -1,4 +1,9 @@
 import * as actions from './actions';
+import * as R from 'ramda';
+
+export const _answers = R.lensProp('answers');
+const answerById = id => R.compose(_answers, R.lensProp(id));
+const userAnswer = id => R.compose(answerById(id), R.lensProp('answer'));
 
 const initialState = {
     answers: {
@@ -11,35 +16,12 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case (actions.ADD_ANSWER):
-            return {
-                ...state,
-                answers: {
-                    ...state.answers,
-                    [action.payload.id]: action.payload
-                }
-            };
+            return R.set(answerById(action.payload.id), action.payload)(state);
         case (actions.DELETE_ANSWER):
-            const withoutProperty = (prop, obj) => {
-                const newObject = {...obj};
-                delete newObject[prop];
-                return newObject;
-            };
-            return {
-                ...state,
-                answers: withoutProperty(action.payload, state.answers)
-            };
+            return R.over(_answers, R.dissoc(action.payload))(state);
         case (actions.UPDATE_ANSWER):
             const { id, answer } = action.payload;
-            return {
-                ...state,
-                answers: {
-                    ...state.answers,
-                    [id]: {
-                        ...state.answers[id],
-                        answer
-                    }
-                }
-            };
+            return R.set(userAnswer(id), answer)(state);
         default: return state;
     }
 };

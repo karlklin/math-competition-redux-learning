@@ -1,9 +1,12 @@
 import React from 'react';
 import { HistoryLogItem } from './HistoryLogItem';
 import { useSelector } from 'react-redux';
+import {_answers} from '../store/reducer';
+import * as R from 'ramda';
 
 export function HistoryLog() {
-    const history = useSelector(state => Object.values(state.answers));
+    const historyMap = useSelector(R.view(_answers));
+    const history = Object.values(historyMap);
 
     return (
         <div className="history-log">
