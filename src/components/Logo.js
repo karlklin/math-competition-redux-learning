@@ -12,7 +12,7 @@ export function Logo() {
                 setAnimation(true);
             }
         }
-    }, [animation, previousAnimation]);
+    });
 
     return (
         <div className={animation ? 'logo animating' : 'logo'}>
