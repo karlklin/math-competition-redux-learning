@@ -1,14 +1,10 @@
 import React from 'react';
-import { isCorrect } from '../services/competitionHelper';
-import { useSelector } from 'react-redux';
-import {_answers} from '../store/reducer';
-import * as R from 'ramda';
+import {useSelector} from 'react-redux';
+import {selectNumberOfAnswers, selectNumberOfCorrectAnswers} from '../store/reducer';
 
 export function TotalResults() {
-
-    const answers = useSelector(R.view(_answers));
-    const correct = Object.values(answers).filter(isCorrect).length;
-    const total = Object.values(answers).length;
+    const correct = useSelector(selectNumberOfCorrectAnswers);
+    const total = useSelector(selectNumberOfAnswers);
 
     return total
         ? <div className="total-result">{correct} / {total}</div>

@@ -1,9 +1,27 @@
 import * as actions from './actions';
 import * as R from 'ramda';
+import { createSelector } from 'reselect';
+import {isCorrect} from '../services/competitionHelper';
 
 export const _answers = R.lensProp('answers');
 const answerById = id => R.compose(_answers, R.lensProp(id));
 const userAnswer = id => R.compose(answerById(id), R.lensProp('answer'));
+
+export const selectAnswers = createSelector(
+    R.view(_answers),
+    R.values
+);
+
+export const selectNumberOfAnswers = createSelector(
+    selectAnswers,
+    R.length
+);
+
+export const selectNumberOfCorrectAnswers = createSelector(
+    selectAnswers,
+    R.pipe(R.filter(isCorrect), R.length)
+);
+
 
 const initialState = {
     answers: {
