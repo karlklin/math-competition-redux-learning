@@ -7,7 +7,7 @@ export const Favourites = ({items}) => {
             <h3>Favorites</h3>
             {items.map(item =>
                 <FavouriteItem
-                    id={item.id}
+                    key={item.id}
                     item={item}/>)}
         </div>
     );
