@@ -5,7 +5,8 @@ const initialState = {
         {id: 1, a: 5, b: 10, operator: '+', answer: 15},
         {id: 2, a: 5, b: 10, operator: '-', answer: 10},
         {id: 3, a: 5, b: 10, operator: '*', answer: 10}
-    ]
+    ],
+    favourites: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +30,18 @@ const reducer = (state = initialState, action) => {
                     : ({...currentAnswer, answer })
                 )
             };
+        case (actions.ADD_LIKE): {
+            return {
+                ...state,
+                favourites: [...state.favourites, action.payload]
+            };
+        }
+        case (actions.REMOVE_LIKE): {
+            return {
+                ...state,
+                favourites: state.filter(item => item.id !== action.payload)
+            };
+        }
         default: return state;
     }
 };

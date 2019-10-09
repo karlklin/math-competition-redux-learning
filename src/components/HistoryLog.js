@@ -2,8 +2,9 @@ import React from 'react';
 import { HistoryLogItem } from './HistoryLogItem';
 import { useSelector } from 'react-redux';
 
-export function HistoryLog({favourites, onLike, onDislike}) {
+export function HistoryLog() {
     const history = useSelector(state => state.answers);
+    const favourites = useSelector(state => state.favourites);
 
     const isLike = id => !!favourites.find(fav => fav.id === id);
 
@@ -14,9 +15,7 @@ export function HistoryLog({favourites, onLike, onDislike}) {
                 <HistoryLogItem
                     key={item.id}
                     item={item}
-                    isLike={isLike(item.id)}
-                    onLike={onLike}
-                    onDislike={onDislike} />)}
+                    isLike={isLike(item.id)}/>)}
         </div>
     );
 }

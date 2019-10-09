@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import * as actions from '../store/actions';
 import { updateAnswer } from '../store/actions';
 
-export function HistoryLogItem({item, isLike, onLike, onDislike}) {
+export function HistoryLogItem({item, isLike}) {
     const dispatch = useDispatch();
     const correct = isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
@@ -27,8 +27,8 @@ export function HistoryLogItem({item, isLike, onLike, onDislike}) {
     return (
         <div className={correct ? 'history-log-item correct' : 'history-log-item wrong'}>
             <i className="fas fa-trash" onClick={() => dispatch(actions.deleteAnswer(item.id))}></i>
-            {!isLike ? <i className="far fa-thumbs-up" onClick={() => onLike(item)}></i> : null}
-            {isLike ? <i className="fas fa-thumbs-up" onClick={() => onDislike(item.id)}></i> : null}
+            {!isLike ? <i className="far fa-thumbs-up" onClick={() => dispatch(actions.addLike(item))}></i> : null}
+            {isLike ? <i className="fas fa-thumbs-up" onClick={() => dispatch(actions.removeLike(item.id))}></i> : null}
             { isToEdit ? <i className="fas fa-edit" onClick={toggleEditor}></i> : null }
             { correct ? <i className="fas"></i> : null }
             { isInEdit ? <i className="fas fa-check" onClick={update}></i> : null }
