@@ -22,6 +22,7 @@ input[type=number]::-webkit-outer-spin-button {
   .competition { grid-area: competition }
   .percentage-history { grid-area: history }
   .history-log { grid-area: log }
+  .favourites { grid-area: favourites}
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -29,7 +30,7 @@ input[type=number]::-webkit-outer-spin-button {
   grid-template-areas:
     'header header log'
     'competition competition log'
-    'history history log'
+    'history history favourites'
   ;
 }
 
@@ -108,7 +109,18 @@ input[type=number]::-webkit-outer-spin-button {
       display: inline-block;
       width: 16px;
     }
+    .far {
+      font-size: 16px;
+      margin-right: 10px;
+      display: inline-block;
+      width: 16px;
+    }
   }
+}
+
+.favourites {
+  border-left: 1px solid #000000;
+  padding-left: 20px;
 }
 
 .header {
@@ -133,14 +145,6 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
-.animating {
-  animation:3s rotateRight infinite linear;
-}
-
-@keyframes rotateRight{
-  100%{ transform:rotate(360deg); }
-}
-
 .percentage-history {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -160,4 +164,12 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: right;
     margin: auto 0;
   }
+}
+
+.animating {
+  animation:3s rotateRight infinite linear;
+}
+
+@keyframes rotateRight{
+  100%{ transform:rotate(360deg); }
 }
