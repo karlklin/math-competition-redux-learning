@@ -30,15 +30,16 @@ https://i.stack.imgur.com/LNQwH.png
 
 # Live code: with redux: part1 [20-35] @MJ
 Pre-requisite: Store setup (?): empty store in dev tools
+Note: HistoryLog update bug :()
 1. Initial state + actions
 2. CompetitionManager: internal state => store
 3. Component by component (caution: ComputationPercentageHistory needs to pass data)
+Note: HistoryLog update bug is resolved :)
 
 # Live code: with redux: part2 [35-50] @Karol
-4. Fix HistoryLog update bug
-5. Flat state
-6. Lens
-7. Reselect
+4. Flat state
+5. Lens
+6. Reselect
 
 ## What we achieved [50-55] @MJ
 - each component of an application can have `direct access to the state` of the application 
