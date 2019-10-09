@@ -30,13 +30,14 @@ https://i.stack.imgur.com/LNQwH.png
 
 # Live code: with redux: part1 [20-35] @MJ
 Pre-requisite: Store setup (?): empty store in dev tools
-Note: HistoryLog update bug :()
+Note: HistoryLog update bug + delete does not update Favourites
 1. Initial state + actions
 2. CompetitionManager: internal state => store
 3. Component by component (caution: ComputationPercentageHistory needs to pass data)
 Note: HistoryLog update bug is resolved :)
 
 # Live code: with redux: part2 [35-50] @Karol
+Note: State structure: double list, History update does not update Favourites, always have to iterate over table to find item
 4. Flat state
 5. Lens
 6. Reselect
