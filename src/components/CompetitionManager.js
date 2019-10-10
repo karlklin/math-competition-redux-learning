@@ -37,7 +37,7 @@ const useAnswers = (initial = []) => {
     return [answers, addAnswer, deleteAnswer];
 };
 
-const useFavourites = (initial =[]) => {
+const useFavourites = (initial = []) => {
     const [favourites, setFavourite] = useState(initial);
     const addLike = answer => setFavourite([...favourites, answer]);
     const removeLike = id => setFavourite(favourites.filter(item => item.id !== id));
