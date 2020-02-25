@@ -1,7 +1,8 @@
 import React from 'react';
 import {isCorrect} from '../services/competitionHelper';
+import {observer} from "mobx-react";
 
-export function PercentageTotalHistory({ answers }) {
+export const PercentageTotalHistory = observer(({ answers }) => {
     const allAnswers = answers.length;
     if(allAnswers === 0) {
         return null;
@@ -14,4 +15,4 @@ export function PercentageTotalHistory({ answers }) {
     return (
         <span>{result} %</span>
     );
-}
+});
