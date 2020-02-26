@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 const generator = competitionGenerator();
 
-export function Competition({ onAnswer, initial }) {
+export function Competition({ answers }) {
 
-    const [data, setData] = useState(initial || generator.next().value);
+    const [data, setData] = useState( generator.next().value);
 
     const submit = e => {
         if(e.key === 'Enter' && e.target.value !== '') {
-            onAnswer({...data, answer: parseInt(e.target.value, 10)});
+            answers.addAnswer({...data, answer: parseInt(e.target.value, 10)});
             setData(generator.next().value);
             e.target.value = '';
         }

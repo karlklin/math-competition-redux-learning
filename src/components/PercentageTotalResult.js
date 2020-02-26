@@ -2,9 +2,9 @@ import React from 'react';
 import {isCorrect} from '../services/competitionHelper';
 import {observer} from "mobx-react";
 
-export const PercentageTotalHistory = observer(({ answers }) => {
+export const PercentageTotalResult = observer(({answers}) => {
     const allAnswers = answers.length;
-    if(allAnswers === 0) {
+    if (allAnswers === 0) {
         return null;
     }
 

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import {correctAnswer, isCorrect} from '../services/competitionHelper';
 
-export function HistoryLogItem({item, isLike, onDelete, onLike, onDislike}) {
+export function HistoryLogItem({item, isLike, answers, onLike, onDislike}) {
 
     const correct = isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
@@ -23,7 +23,7 @@ export function HistoryLogItem({item, isLike, onDelete, onLike, onDislike}) {
 
     return (
         <div className={correct ? 'history-log-item correct' : 'history-log-item wrong'}>
-            <i className="fas fa-trash" onClick={() => onDelete(item.id)}></i>
+            <i className="fas fa-trash" onClick={() => answers.deleteAnswer(item.id)}></i>
             {!isLike ? <i className="far fa-thumbs-up" onClick={() => onLike(item)}></i> : null}
             {isLike ? <i className="fas fa-thumbs-up" onClick={() => onDislike(item.id)}></i> : null}
             { isToEdit ? <i className="fas fa-edit" onClick={toggleEditor}></i> : null }

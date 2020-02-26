@@ -9,12 +9,12 @@ export const HistoryLog = observer(({history, favourites, onDelete, onLike, onDi
     return (
         <div className="history-log">
             <h3>Log</h3>
-            {history.map(item =>
+            {history.answersList.map(item =>
                 <HistoryLogItem
                     key={item.id}
                     item={item}
                     isLike={isLike(item.id)}
-                    onDelete={onDelete}
+                    answers={history}
                     onLike={onLike}
                     onDislike={onDislike} />)}
         </div>
