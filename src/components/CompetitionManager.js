@@ -6,6 +6,8 @@ import {PercentageHistory} from './PercentageHistory';
 import {HistoryLog} from './HistoryLog';
 import {Favourites} from "./Favourites";
 import {observable} from "mobx";
+import {isCorrect} from "../services/competitionHelper";
+import {computed} from "mobx";
 
 class Answers {
     @observable list = [
@@ -16,6 +18,47 @@ class Answers {
 
     get answersList() {
         return this.list;
+    }
+
+    @computed get allCount() {
+        return this.list.length;
+    }
+
+    @computed get correctCount() {
+        return this.list.filter(isCorrect).length
+    }
+
+    filterBy = op => this.list.filter(item => item.operator === op);
+
+    @computed get totalAnswers() {
+        return this.filterBy('+');
+    }
+
+    @computed get differenceAnswers() {
+        return this.filterBy('-')
+    }
+
+    @computed get productAnswers() {
+        return this.filterBy('*');
+    }
+
+    percentageOfCorrect = answers => {
+        const allAnswers = answers.length;
+        const correctAnswers = answers.filter(isCorrect).length;
+
+        return allAnswers === 0 ? 0 : Math.floor(correctAnswers * 100 / allAnswers);
+    };
+
+    @computed get percentageOfTotalCorrect() {
+        return this.percentageOfCorrect(this.totalAnswers);
+    }
+
+    @computed get percentageOfDifferenceCorrect() {
+        return this.percentageOfCorrect(this.differenceAnswers);
+    }
+
+    @computed get pecentageOfProductCorrect() {
+        return this.percentageOfCorrect(this.productAnswers);
     }
 
     addAnswer(answer) {
