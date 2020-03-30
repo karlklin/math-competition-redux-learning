@@ -49,6 +49,10 @@ class Answers {
         return allAnswers === 0 ? 0 : Math.floor(correctAnswers * 100 / allAnswers);
     };
 
+    @computed get percentageOfAllCorrect() {
+        return this.percentageOfCorrect(this.list);
+    }
+
     @computed get percentageOfTotalCorrect() {
         return this.percentageOfCorrect(this.totalAnswers);
     }
