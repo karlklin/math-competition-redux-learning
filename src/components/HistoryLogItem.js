@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef} from 'react';
 import {correctAnswer, isCorrect} from '../services/competitionHelper';
 
 export function HistoryLogItem({item, isLike, answers, onLike, onDislike}) {
@@ -13,7 +13,7 @@ export function HistoryLogItem({item, isLike, answers, onLike, onDislike}) {
     };
 
     const submit = e => {
-        if(e.key === 'Enter' && e.target.value !== '') {
+        if (e.key === 'Enter' && e.target.value !== '') {
             update();
         }
     };
@@ -23,19 +23,22 @@ export function HistoryLogItem({item, isLike, answers, onLike, onDislike}) {
 
     return (
         <div className={correct ? 'history-log-item correct' : 'history-log-item wrong'}>
-            <i className="fas fa-trash" onClick={() => answers.deleteAnswer(item.id)}></i>
+            <i className="fas fa-trash" onClick={() => {
+                answers.deleteAnswer(item.id);
+                onDislike(item.id);
+            }}></i>
             {!isLike ? <i className="far fa-thumbs-up" onClick={() => onLike(item)}></i> : null}
             {isLike ? <i className="fas fa-thumbs-up" onClick={() => onDislike(item.id)}></i> : null}
-            { isToEdit ? <i className="fas fa-edit" onClick={toggleEditor}></i> : null }
-            { correct ? <i className="fas"></i> : null }
-            { isInEdit ? <i className="fas fa-check" onClick={update}></i> : null }
+            {isToEdit ? <i className="fas fa-edit" onClick={toggleEditor}></i> : null}
+            {correct ? <i className="fas"></i> : null}
+            {isInEdit ? <i className="fas fa-check" onClick={update}></i> : null}
             <span>{item.a}</span>
             <span>{item.operator}</span>
             <span>{item.b}</span>
             <span>=</span>
-            { !isInEdit ? <span className="answer">{item.answer}</span> : null }
-            { !isInEdit ? <span className="correct-answer">{correctAnswer(item)}</span> : null }
-            { isInEdit ? <input type="number" onKeyPress={submit} ref={newValue} /> : null }
+            {!isInEdit ? <span className="answer">{item.answer}</span> : null}
+            {!isInEdit ? <span className="correct-answer">{correctAnswer(item)}</span> : null}
+            {isInEdit ? <input type="number" onKeyPress={submit} ref={newValue}/> : null}
         </div>
     );
 }
