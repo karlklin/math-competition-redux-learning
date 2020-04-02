@@ -1,8 +1,7 @@
 import React from 'react';
-import {observer} from "mobx-react";
 
-export const PercentageTotalResult = observer(({result}) => {
+export const PercentageTotalResult = ({result}) => {
     return (
         <span>{result} %</span>
     );
-});
+};
