@@ -19,11 +19,11 @@ class Answers {
     @observable favourites = [];
 
     get answersList() {
-        return this.list;
+        return this.list.slice();
     }
 
     get favourites() {
-        return this.favourites;
+        return this.favourites.slice();
     }
 
     @computed get allCount() {
