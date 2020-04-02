@@ -16,8 +16,14 @@ class Answers {
         {id: 3, a: 5, b: 10, operator: '*', answer: 10},
     ];
 
+    @observable favourites = [];
+
     get answersList() {
         return this.list;
+    }
+
+    get favourites() {
+        return this.favourites;
     }
 
     @computed get allCount() {
@@ -70,33 +76,36 @@ class Answers {
     }
 
     deleteAnswer(id) {
-        const index = this.list.findIndex(item => item.id !== id);
-        this.list.splice(index, 1);
+        const index = this.list.findIndex(item => item.id === id);
+        index >=0 && this.list.splice(index, 1);
+
+        this.unlike(id);
+    }
+
+    like(answer) {
+        this.favourites.push(answer);
+    }
+
+    unlike(id) {
+        const index = this.favourites.findIndex(item => item.id === id);
+        index >= 0 && this.favourites.splice(index, 1);
+    }
+
+    isLike(id) {
+        return !!this.favourites.find(fav => fav.id === id)
     }
 }
 
 const answers = new Answers();
 
-const favourites = mobx.observable([]);
-const addLike = answer => favourites.push(answer);
-const removeLike = id => {
-    const index = favourites.findIndex(item => item.id !== id);
-    favourites.splice(index, 1);
-};
-
 export const CompetitionManager = () => {
-
-    console.log('the answers=', answers.list.length);
     return (
         <div className="container">
             <Header answers={answers}/>
             <Competition answers={answers}/>
             <PercentageHistory answers={answers}/>
-            <HistoryLog history={answers}
-                        favourites={favourites}
-                        onLike={addLike}
-                        onDislike={removeLike}/>
-            <Favourites items={favourites}/>
+            <HistoryLog answers={answers}/>
+            <Favourites answers={answers}/>
         </div>
     );
 };
