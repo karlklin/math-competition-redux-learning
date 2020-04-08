@@ -1,8 +1,10 @@
 import React from 'react';
 import {HistoryLogItem} from './HistoryLogItem';
 import {observer} from "mobx-react";
+import {useAnswersState} from "../state/AnswersStateProvider";
 
-export const HistoryLog = observer(({answers}) => {
+export const HistoryLog = observer(() => {
+    const answers = useAnswersState();
 
     return (
         <div className="history-log">
@@ -11,8 +13,7 @@ export const HistoryLog = observer(({answers}) => {
                 <HistoryLogItem
                     key={item.id}
                     item={item}
-                    isLike={answers.isLike(item.id)}
-                    answers={answers}/>)}
+                    isLike={answers.isLike(item.id)}/>)}
         </div>
     );
 });

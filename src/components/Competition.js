@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import {useAnswersState} from "../state/AnswersStateProvider";
 
 const generator = competitionGenerator();
 
-export function Competition({ answers }) {
-
+export function Competition() {
+    const answers = useAnswersState();
     const [data, setData] = useState( generator.next().value);
 
     const submit = e => {

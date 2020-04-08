@@ -1,7 +1,7 @@
 import {computed, observable} from "mobx";
 import {isCorrect} from "../services/competitionHelper";
 
-export class AnswersState {
+export class Answers {
     @observable list = [
         {id: 1, a: 5, b: 10, operator: '+', answer: 15},
         {id: 2, a: 5, b: 10, operator: '-', answer: 10},

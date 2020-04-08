@@ -1,8 +1,11 @@
 import React from 'react';
 import {PercentageTotalResult} from './PercentageTotalResult';
 import {observer} from "mobx-react";
+import {useAnswersState} from "../state/AnswersStateProvider";
 
-export const ComputationPercentageHistory = observer(({answers}) => {
+export const ComputationPercentageHistory = observer(() => {
+    const answers = useAnswersState();
+
     return (
         <>
             <div className="adding">
