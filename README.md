@@ -9,15 +9,32 @@ https://mobx.js.org/refguide/observable.html
 - useLocalState (only in functional components)
 - tree state: https://github.com/mobxjs/mobx-state-tree
 
-## Destructing
+## Destructing TODO 
 https://mobx-react.js.org/state-destruct
 
-## State of component
+## State of component TODO
 https://mobx-react.js.org/state-local
 
-## State outsourcing
+## State outsourcing TODO
 https://mobx-react.js.org/state-outsourcing
 
 # Accessing state
 - using React Context: https://mobx-react.js.org/recipes-context
 - as global variable (impacts testing)
+
+# Complex & global stores
+https://mobx-react.js.org/recipes-context#complex-stores
+
+```javascript
+export const storesContext = React.createContext({
+  counterStore: new CounterStore(),
+  themeStore: new ThemeStore(),
+})
+```
+
+- one context containing different observable and then using hooks to extract to hide structure (useFavorites())
+- or by different contexts
+- or tree state: https://github.com/mobxjs/mobx-state-tree
+
+# Side effects TODO
+https://mobx-react.js.org/recipes-effects

@@ -1,7 +1,7 @@
 import {computed, observable} from "mobx";
 import {isCorrect} from "../services/competitionHelper";
 
-export class Answers {
+class CreateAnswers {
     @observable list = [
         {id: 1, a: 5, b: 10, operator: '+', answer: 15},
         {id: 2, a: 5, b: 10, operator: '-', answer: 10},
@@ -87,3 +87,5 @@ export class Answers {
         return !!this.favourites.find(fav => fav.id === id)
     }
 }
+
+export const createAnswers = () => new CreateAnswers();
