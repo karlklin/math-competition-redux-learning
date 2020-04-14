@@ -6,14 +6,15 @@ https://mobx-react.js.org/observe-how
 ## Creating state
 - observable(value) or @observable classProperty = value
 https://mobx.js.org/refguide/observable.html
+
 - useLocalState (only in functional components)
+https://mobx-react.js.org/state-local
+
 - tree state: https://github.com/mobxjs/mobx-state-tree
 
-## Destructing TODO 
+## Don't destructure
 https://mobx-react.js.org/state-destruct
-
-## State of component TODO
-https://mobx-react.js.org/state-local
+https://mobx.js.org/refguide/boxed.html
 
 ## State outsourcing TODO
 https://mobx-react.js.org/state-outsourcing
@@ -26,15 +27,27 @@ https://mobx-react.js.org/state-outsourcing
 https://mobx-react.js.org/recipes-context#complex-stores
 
 ```javascript
-export const storesContext = React.createContext({
+const StoresContext = React.createContext({
   counterStore: new CounterStore(),
   themeStore: new ThemeStore(),
 })
 ```
 
-- one context containing different observable and then using hooks to extract to hide structure (useFavorites())
+- one context containing different observable and then using hooks to extract to hide structure
+```javascript
+const useCounterStore = () => {
+    const { counterStore } = useContext(StoresContext);
+    return counterStore;
+}
+```
+
 - or by different contexts
 - or tree state: https://github.com/mobxjs/mobx-state-tree
 
-# Side effects TODO
+# Side effects
+- this one is tricky (to be discussed with @MJ). Basically they are saying to use only mobx reactivity in side effects 
 https://mobx-react.js.org/recipes-effects
+
+# Follow-up topics
+- tree state: might be interesting
+https://github.com/mobxjs/mobx-state-tree

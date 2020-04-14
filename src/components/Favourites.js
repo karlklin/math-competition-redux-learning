@@ -9,7 +9,7 @@ export const Favourites = observer(() => {
     return (
         <div className="favourites history-log">
             <h3>Favorites</h3>
-            {answers.favourites.map(item =>
+            {answers.favouritesList.map(item =>
                 <FavouriteItem
                     key={item.id}
                     item={item}/>)}

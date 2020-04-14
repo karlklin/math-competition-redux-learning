@@ -1,7 +1,7 @@
 import {computed, observable} from "mobx";
 import {isCorrect} from "../services/competitionHelper";
 
-class CreateAnswers {
+class Answers {
     @observable list = [
         {id: 1, a: 5, b: 10, operator: '+', answer: 15},
         {id: 2, a: 5, b: 10, operator: '-', answer: 10},
@@ -14,7 +14,7 @@ class CreateAnswers {
         return this.list.slice();
     }
 
-    get favourites() {
+    get favouritesList() {
         return this.favourites.slice();
     }
 
@@ -88,4 +88,4 @@ class CreateAnswers {
     }
 }
 
-export const createAnswers = () => new CreateAnswers();
+export const createAnswersState = () => new Answers();
