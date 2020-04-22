@@ -110,6 +110,20 @@ https://mobx.js.org/refguide/modifiers.html
 https://github.com/mobxjs/mobx-state-tree
 - server-side rendering TBD
 
-# To mention
-1) Mobx has more features than Redux
-2) Redux is lighter than Mobx
+# How we drive the session? 
+- Compare and battle the paradigm
+https://www.youtube.com/watch?v=76FRrbY18Bs
+
+- Redux is "susceptible to oversubscribing"
+"Coarse grained subscriptions like Flux-style store subscriptions are very susceptible to oversubscribing. 
+When using React, you can simply tell whether your components are oversubscribing by printing wasted renderings. MobX will reduce this number to zero.
+https://medium.com/@tylerwclark/the-why-behind-mobx-3e8555b1d60b
+
+- Mobx introduction TBD
+https://medium.com/@tylerwclark/mobx-for-application-state-management-7b33e35c4883
+
+- Mobx has more features than Redux 
+- Redux is lighter than Mobx
+- Redux is used wider but Mobx is battle field tested actually:
+https://github.com/mobxjs/mobx/issues/681
+
