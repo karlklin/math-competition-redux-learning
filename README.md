@@ -28,6 +28,7 @@ https://mobx-react.js.org/recipes-effects
 
 ### autorun & reactions
 - disposer function (TBD @MJ)
+- when to use `autorun` & `reaction`
 ### when
 - similiarity to useEffect (TBD @MJ)
 
