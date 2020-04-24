@@ -1,14 +1,29 @@
-import {computed, observable} from "mobx";
+import {computed, observable, autorun} from "mobx";
 import {isCorrect} from "../services/competitionHelper";
+import {api} from '../services/api';
 
 class Answers {
+
     @observable list = [
         {id: 1, a: 5, b: 10, operator: '+', answer: 15},
         {id: 2, a: 5, b: 10, operator: '-', answer: 10},
         {id: 3, a: 5, b: 10, operator: '*', answer: 10},
     ];
 
+    @observable loading = [];
+
     @observable favourites = [];
+
+    constructor() {
+        autorun(() => {
+            console.log({
+                list: this.answersList,
+                favourites: this.favouritesList,
+                allCount: this.allCount,
+                isLoading: this.isLoading
+            })
+        })
+    }
 
     get answersList() {
         return this.list.slice();
@@ -63,24 +78,44 @@ class Answers {
         return this.percentageOfCorrect(this.productAnswers);
     }
 
+    @computed get isLoading() {
+        return this.loading.length > 0;
+    }
+
     addAnswer(answer) {
-        this.list.push(answer);
+        this.loading.push(true);
+        api.addAnswer(answer).then(() => {
+            this.list.push(answer);
+            this.loading.pop();
+        })
     }
 
     deleteAnswer(id) {
-        const index = this.list.findIndex(item => item.id === id);
-        index >=0 && this.list.splice(index, 1);
+        this.loading.push(true);
+        api.deleteAnswer(id).then(() => {
+            const index = this.list.findIndex(item => item.id === id);
+            index >=0 && this.list.splice(index, 1);
+            this.unlike(id);
+            this.loading.pop();
+        })
 
-        this.unlike(id);
     }
 
     like(answer) {
-        this.favourites.push(answer);
+        this.loading.push(true);
+        api.like(answer).then(() => {
+            this.favourites.push(answer);
+            this.loading.pop();
+        })
     }
 
     unlike(id) {
-        const index = this.favourites.findIndex(item => item.id === id);
-        index >= 0 && this.favourites.splice(index, 1);
+        this.loading.push(true);
+        api.unlike(id).then(() => {
+            const index = this.favourites.findIndex(item => item.id === id);
+            index >= 0 && this.favourites.splice(index, 1);
+            this.loading.pop();
+        })
     }
 
     isLike(id) {
