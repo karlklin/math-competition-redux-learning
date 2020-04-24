@@ -27,24 +27,31 @@ and expresses the intention of a function to modify state."
 https://mobx-react.js.org/recipes-effects
 
 ### autorun & reactions
-- disposer function (TBD @MJ)
-- when to use `autorun` & `reaction`
+- @MJ: disposer function? (TBD @MJ)
+- when to use `autorun` & `reaction` comparing to `useEffect`? 
+    - `useEffect` is much more cleaner 
 ### when
 - similiarity to useEffect (TBD @MJ)
+https://mobx.js.org/refguide/autorun.html
 
-## Actions TBD @MJ
-- transactions
+## Actions
+- transactions TBD @MJ
 "Especially the fact that transaction is applied automatically yields great performance benefits; 
 actions will batch mutations and only notify computed values and reactions after the (outer most) action has finished."
 
 - async actions
-- runInAction for async & await vs flows
+    - if action strict mode is on you cannot modify the state in the callback (either using `then()` or `async/await`)
+    - you can work around this by having `@action` for callbacks or to wrap callback with `action()` or `runInAction`
+    - but the simplier way is to just to use `@action` to modify the state
 https://mobx.js.org/best/actions.html
 
-https://mobx.js.org/refguide/autorun.html
+- nicer approach using `flows` 
+    - @MJ do we really need this if we have `@actions` to modify state? 
+https://mobx.js.org/best/actions.html
 
 ## Modifiers
 - observable.deep vs observable.shallow
+    - @MJ example with fetching data from web that we don't really what to observer deeply
 - computed vs computed.struct
 https://mobx.js.org/refguide/modifiers.html
 
@@ -111,7 +118,7 @@ https://mobx.js.org/refguide/modifiers.html
 https://github.com/mobxjs/mobx-state-tree
 - server-side rendering TBD
 
-# How we drive the session? 
+# References
 - Compare and battle the paradigm
 https://www.youtube.com/watch?v=76FRrbY18Bs
 
