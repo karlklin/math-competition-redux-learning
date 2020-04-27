@@ -10,7 +10,7 @@ export function HistoryLogItem({item, isLike}) {
     const newValue = useRef(item.answer);
 
     const update = () => {
-        item.answer = parseInt(newValue.current.value);
+        answers.updateAnswer(item.id, parseInt(newValue.current.value))
         toggleEditor();
     };
 
