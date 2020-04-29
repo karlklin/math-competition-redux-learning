@@ -1,8 +1,9 @@
 import React, {useState, useRef} from 'react';
 import {correctAnswer, isCorrect} from '../services/competitionHelper';
 import {useAnswersState} from "../state/AnswersStateProvider";
+import {observer} from "mobx-react";
 
-export function HistoryLogItem({item, isLike}) {
+export const HistoryLogItem = observer(({item, isLike}) => {
     const answers = useAnswersState();
 
     const correct = isCorrect(item);
@@ -44,7 +45,7 @@ export function HistoryLogItem({item, isLike}) {
             {isInEdit ? <input type="number" onKeyPress={submit} ref={newValue}/> : null}
         </div>
     );
-}
+});
 
 const useToggle = initial => {
     const [toggled, setToggled] = useState(initial);
