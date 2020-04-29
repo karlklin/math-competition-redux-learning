@@ -15,7 +15,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   margin: 0;
   padding: 0;
-  top: 0;
+  top: 20px;
   left: 0;
 
   .header { grid-area: header }
@@ -172,4 +172,41 @@ input[type=number]::-webkit-outer-spin-button {
 
 @keyframes rotateRight{
   100%{ transform:rotate(360deg); }
+}
+
+.loading {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.diagram-totalResults {
+  width: 50px;
+  height: 10px;
+  border: 1px solid #000000;
+  background: #ffffff;
+  display: inline-block;
+  div {
+    background: #cccccc;
+    height: 100%;
+  }
+}
+
+.difficulty {
+  border-bottom: 1px solid black;
+  text-align: right;
+  height: 20px;
+
+  a {
+    cursor: pointer;
+    padding: 0 3px;
+
+    &.active {
+      color: red;
+    }
+  }
 }
