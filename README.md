@@ -22,32 +22,23 @@ and expresses the intention of a function to modify state."
 ## Computed
 - default is to use @Computed for getters
 
-## Side effects (TBD @MJ)
+## Side effects
 - this one is tricky. Basically they are saying to use only mobx reactivity in side effects 
 https://mobx-react.js.org/recipes-effects
 
 ### autorun & reactions
-- @MJ: disposer function? (TBD @MJ)
 - when to use `autorun` & `reaction` comparing to `useEffect`? 
     - `useEffect` is much more cleaner 
-### when
-- similiarity to useEffect (TBD @MJ)
-https://mobx.js.org/refguide/autorun.html
+https://github.com/mobxjs/mobx-react/issues/772 
 
-## Actions
-- transactions TBD @MJ
-"Especially the fact that transaction is applied automatically yields great performance benefits; 
-actions will batch mutations and only notify computed values and reactions after the (outer most) action has finished."
+## Asynchronous actions
+https://mobx.js.org/best/actions.html
 
 - async actions
     - if action strict mode is on you cannot modify the state in the callback (either using `then()` or `async/await`)
     - you can work around this by having `@action` for callbacks or to wrap callback with `action()` or `runInAction`
     - but the simplier way is to just to use `@action` to modify the state
-https://mobx.js.org/best/actions.html
-
 - nicer approach using `flows` 
-    - @MJ do we really need this if we have `@actions` to modify state? 
-https://mobx.js.org/best/actions.html
 
 ## Modifiers
 - observable.deep vs observable.shallow
@@ -75,35 +66,10 @@ https://mobx-react.js.org/state-local
 
 - tree state: https://github.com/mobxjs/mobx-state-tree
 
-## Don't destructure
-https://mobx-react.js.org/state-destruct
-https://mobx.js.org/refguide/boxed.html
-
-## State outsourcing TODO
-https://mobx-react.js.org/state-outsourcing
-
-## Accessing state
-- using React Context: https://mobx-react.js.org/recipes-context
-- as global variable (impacts testing)
-
-## Complex & global stores
+## Accessing complex & global stores
 https://mobx-react.js.org/recipes-context#complex-stores
 
-```javascript
-const StoresContext = React.createContext({
-  counterStore: new CounterStore(),
-  themeStore: new ThemeStore(),
-})
-```
-
 - one context containing different observable and then using hooks to extract to hide structure
-```javascript
-const useCounterStore = () => {
-    const { counterStore } = useContext(StoresContext);
-    return counterStore;
-}
-```
-
 - or by different contexts
 - or tree state: https://github.com/mobxjs/mobx-state-tree
 
@@ -127,9 +93,8 @@ https://www.youtube.com/watch?v=76FRrbY18Bs
 When using React, you can simply tell whether your components are oversubscribing by printing wasted renderings. MobX will reduce this number to zero.
 https://medium.com/@tylerwclark/the-why-behind-mobx-3e8555b1d60b
 
-- Mobx introduction TBD
-https://medium.com/@tylerwclark/mobx-for-application-state-management-7b33e35c4883
 
+# Our notes
 - Mobx has more features than Redux 
 - Redux is lighter than Mobx
 - Redux is used wider but Mobx is battle field tested actually:
