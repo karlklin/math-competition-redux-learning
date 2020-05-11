@@ -22,6 +22,10 @@ class Answers {
                 allCount: this.allCount,
                 isLoading: this.isLoading
             })
+        }, {
+            scheduler: run => {
+                setTimeout(run, 1000)
+            }
         })
     }
 
