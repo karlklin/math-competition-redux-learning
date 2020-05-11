@@ -1,4 +1,4 @@
-import {computed, observable, autorun, runInAction, action} from 'mobx';
+import {computed, observable, runInAction, action} from 'mobx';
 import {isCorrect} from "../services/competitionHelper";
 import {api} from '../services/api';
 
@@ -13,21 +13,6 @@ class Answers {
     @observable loading = [];
 
     @observable favourites = [];
-
-    constructor() {
-        autorun(() => {
-            console.log({
-                list: this.answersList,
-                favourites: this.favouritesList,
-                allCount: this.allCount,
-                isLoading: this.isLoading
-            })
-        }, {
-            scheduler: run => {
-                setTimeout(run, 1000)
-            }
-        })
-    }
 
     @computed get answersList() {
         return this.list.slice();

@@ -6,7 +6,7 @@ const AnswersStateContext = createContext(null);
 
 configure({
     enforceActions: 'observed'
-})
+});
 
 export const AnswersStateProvider = ({children}) => {
     // another option is to use component local store

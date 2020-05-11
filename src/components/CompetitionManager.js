@@ -20,6 +20,7 @@ export const CompetitionManager = () => {
         Difficulty:
         { difficulties.map(num =>
           <a key={num}
+             href="/#"
              className={difficulty === num ? 'active' : ''}
              onClick={updateDifficulty(num)}>{num}</a>
         )}

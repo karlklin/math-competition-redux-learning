@@ -34,8 +34,13 @@
 
 ### observer -> HOC, component, function
 
+#### passing observables down the component tree
+
+Show even though the state is update after correcting the answer, the item in UI is not. The reason is that a component responsible to display an item is not wrapped in by `observer` function
 
 ### autorun
+
+Logger.js 
 
 PageTitle.js (delay? scheduler?)
 
@@ -71,18 +76,14 @@ Options:
 ### when
 Run only until certain condition is met.
 
-```javascript
-// not sure about the use case for this???
-```
-
-### mutable vs immutable
+### strict mode
 
 Start with a bug in the code causing not updating stats when on of the wrong results is being corrected.
 
 Describe the problem about mutability:
 - default implementation let you modify state in place (without running an action)
 - it may cause unpredicted regressions (update result case)
-- it's safer to have immutable state and use action to update it
+- it's safer to use action to update it as it helps to better structure the code
 - MobX can be configured so it forces using actions
 
 ```javascript
@@ -98,10 +99,6 @@ vs
         enforceActions: 'observed'
     })
 ```
-
-### passing observables down the component tree
-
-Show even though the state is update after correcting the answer, the item in UI is not. The reason is that a component responsible to display an item is not wrapped in by `observer` function
 
 ### local store
 

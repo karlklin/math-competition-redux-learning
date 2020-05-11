@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {useAnswersState} from "../state/AnswersStateProvider";
 import {useLocalStore, observer, useAsObservableSource} from 'mobx-react'
 import {runInAction} from 'mobx';
-
-
 
 export const Competition = observer(({ difficulty }) => {
     const answers = useAnswersState();

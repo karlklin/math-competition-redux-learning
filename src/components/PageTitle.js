@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import {observer} from "mobx-react";
-import {when, reaction} from 'mobx';
+import {reaction} from 'mobx';
 import {useAnswersState} from "../state/AnswersStateProvider";
 
 export const PageTitle = observer(() => {
@@ -19,6 +19,7 @@ export const PageTitle = observer(() => {
       }, {
           fireImmediately: true
       }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     ), []);
     return null;
 });
