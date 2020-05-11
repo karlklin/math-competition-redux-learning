@@ -17,14 +17,14 @@ export const Competition = observer(({ difficulty }) => {
         operator: initialValue.operator,
         next() {
             runInAction(() => {
-                const v = newCompetition(config.difficulty)
+                const v = newCompetition(config.difficulty);
                 this.id = v.id;
                 this.a = v.a;
                 this.b = v.b;
-                this.operator = this.operator;
-            })
+                this.operator = v.operator;
+            });
         }
-    }))
+    }));
 
     const submit = e => {
         if(e.key === 'Enter' && e.target.value !== '') {
