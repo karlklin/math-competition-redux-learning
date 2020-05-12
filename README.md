@@ -93,7 +93,6 @@ https://www.youtube.com/watch?v=76FRrbY18Bs
 When using React, you can simply tell whether your components are oversubscribing by printing wasted renderings. MobX will reduce this number to zero.
 https://medium.com/@tylerwclark/the-why-behind-mobx-3e8555b1d60b
 
-
 # Our notes
 - Mobx has more features than Redux 
 - Redux is lighter than Mobx
