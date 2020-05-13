@@ -6,7 +6,9 @@ import '@fortawesome/fontawesome-free/css/all.css'
 
 function App() {
   return (
-      <CompetitionManager />
+      <React.Fragment>
+        <CompetitionManager />
+      </React.Fragment>
   );
 }
 

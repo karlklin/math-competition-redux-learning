@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import {correctAnswer, isCorrect} from '../services/competitionHelper';
 
-export function HistoryLogItem({item, isLike, onDelete, onLike, onDislike}) {
+export function HistoryLogItem({item, isLike, deleteAnswer, likeAnswer, unlikeAnswer}) {
 
     const correct = isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
@@ -21,11 +21,15 @@ export function HistoryLogItem({item, isLike, onDelete, onLike, onDislike}) {
     const isToEdit = !correct && !editor;
     const isInEdit = !correct && editor;
 
+    const onDelete = () => deleteAnswer(item.id);
+    const onLike = () => likeAnswer(item);
+    const onUnlike = () => unlikeAnswer(item.id);
+
     return (
         <div className={correct ? 'history-log-item correct' : 'history-log-item wrong'}>
-            <i className="fas fa-trash" onClick={() => onDelete(item.id)}></i>
-            {!isLike ? <i className="far fa-thumbs-up" onClick={() => onLike(item)}></i> : null}
-            {isLike ? <i className="fas fa-thumbs-up" onClick={() => onDislike(item.id)}></i> : null}
+            <i className="fas fa-trash" onClick={onDelete}></i>
+            {!isLike ? <i className="far fa-thumbs-up" onClick={onLike}></i> : null}
+            {isLike ? <i className="fas fa-thumbs-up" onClick={onUnlike}></i> : null}
             { isToEdit ? <i className="fas fa-edit" onClick={toggleEditor}></i> : null }
             { correct ? <i className="fas"></i> : null }
             { isInEdit ? <i className="fas fa-check" onClick={update}></i> : null }

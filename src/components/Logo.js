@@ -4,6 +4,7 @@ export function Logo() {
     const [animation, setAnimation] = useState(true);
     const previousAnimation = usePrevious(animation);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         if (animation) {
             setTimeout(() => setAnimation(false), 3000);

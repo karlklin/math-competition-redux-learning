@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 
-const generator = competitionGenerator();
-
-export function Competition({ onAnswer, initial }) {
-
-    const [data, setData] = useState(initial || generator.next().value);
+export function Competition({ onAnswer, difficulty }) {
+    const [data, setData] = useState(newCompetition(difficulty));
 
     const submit = e => {
         if(e.key === 'Enter' && e.target.value !== '') {
             onAnswer({...data, answer: parseInt(e.target.value, 10)});
-            setData(generator.next().value);
+            setData(newCompetition(difficulty));
             e.target.value = '';
         }
     };
@@ -25,15 +22,13 @@ export function Competition({ onAnswer, initial }) {
     );
 }
 
-function* competitionGenerator() {
+const newCompetition = (difficulty = 10) => {
     const operators = ['+', '-', '*'];
     const rand = max => ~~(Math.random() * max);
-    while(true) {
-        yield {
-            id: Date.now(),
-            a: rand(10),
-            b: rand(10),
-            operator: operators[rand(3)]
-        }
+    return {
+        id: Date.now(),
+        a: rand(difficulty),
+        b: rand(difficulty),
+        operator: operators[rand(operators.length)]
     }
 }
