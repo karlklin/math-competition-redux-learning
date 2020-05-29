@@ -11,7 +11,7 @@ export const api = {
 export const useApi = () => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const runWithLoading = apiFn => async data => {
+    const callApi = apiFn => async data => {
         setIsLoading(true);
         const result = await apiFn(data);
         setIsLoading(false);
@@ -19,10 +19,10 @@ export const useApi = () => {
     };
 
     const withLoading = {
-        addAnswer: runWithLoading(api.addAnswer),
-        deleteAnswer: runWithLoading(api.deleteAnswer),
-        like: runWithLoading(api.like),
-        unlike: runWithLoading(api.unlike)
+        addAnswer: callApi(api.addAnswer),
+        deleteAnswer: callApi(api.deleteAnswer),
+        like: callApi(api.like),
+        unlike: callApi(api.unlike)
     };
 
     return [withLoading, isLoading];
