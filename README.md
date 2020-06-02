@@ -1,72 +1,101 @@
-# Live coding: without redux [00-10] @MJ
-- `lifting up state and passing data via props` 
-    - putting the data in the nearest ancestor of the two components and passing the data down as props
-- `coupling components`
-    - makes it harder to move components around because there is a coupling
-- `impact on performance`
-    - could cause performance issue since every update to the data would cause all the children to re-render
+# Core concepts
+- "Hence many state management solutions try to restrict the ways in which you can modify state, for example by making state immutable. 
+But this introduces new problems: 
+1) data needs to be normalized
+2) referential integrity can no longer be guaranteed 
+3) and it becomes next to impossible to use powerful concepts like prototypes."
 
-# Three principle & live coding [10-20] @Karol
-https://redux.js.org/introduction/three-principles
-https://i.stack.imgur.com/LNQwH.png
+- "MobX makes state management simple again by addressing the root issue: it makes it impossible to produce an inconsistent state. 
+The strategy to achieve that is simple: Make sure that everything that can be derived from the application state, will be derived. Automatically."
+https://mobx.js.org/getting-started
 
-- `Single source of truth`
-    - the state of your whole application is stored in an object tree within a single store
-    - easier to create universal apps, as the state from your server can be serialized and hydrated into the client with no extra coding effort
-    - easier to debug or inspect an application
-    - it also enables you to persist your app's state in development, for a faster development cycle. 
-    - some functionality which has been traditionally difficult to implement - Undo/Redo, for example - can suddenly become trivial to implement
+## Observables
+- Tip: "By default, making a data structure observable is infective; 
+that means that observable is applied automatically to any value that is contained by the data structure, 
+or will be contained by the data structure in the future. This behavior can be changed by using modifiers."
 
-- `State is read-only`
-    - the only way to change the state is to emit an action, an object describing what happened
-    - neither the views nor the network callbacks will ever write directly to the state. Instead, they express an intent to transform the state. 
-    - all changes are centralized and happen one by one in a strict order, there are no subtle race conditions to watch out for
-    - as actions are just plain objects, they can be logged, serialized, stored, and later replayed for debugging or testing purposes
-    
-`Changes are made with pure functions`
-    - to specify how the state tree is transformed by actions, you write pure reducers
-    - reducers are just pure functions that take the previous state and an action, and return the next state
-    - remember to return new state objects, instead of mutating the previous state
+## Actions
+- "The action wrapper is only needed when using MobX in strict mode (by default off). 
+It is recommended to use action though as it will help you to better structure applications 
+and expresses the intention of a function to modify state."
 
-# Live code: with redux: part1 [20-35] @MJ
-Pre-requisite: Store setup (?): empty store in dev tools
-Note: HistoryLog update bug + delete does not update Favourites
-1. Initial state + actions
-2. CompetitionManager: internal state => store
-3. Component by component (caution: ComputationPercentageHistory needs to pass data)
-Note: HistoryLog update bug is resolved :)
+## Computed
+- default is to use @Computed for getters
 
-# Live code: with redux: part2 [35-50] @Karol
-Note: State structure: double list, History update does not update Favourites, always have to iterate over table to find item
-4. Flat state
-5. Lens
-6. Reselect
+## Side effects
+- this one is tricky. Basically they are saying to use only mobx reactivity in side effects 
+https://mobx-react.js.org/recipes-effects
 
-## What we achieved [50-55] @MJ
-- each component of an application can have `direct access to the state` of the application 
-- no need for sending props down to child components or using `callback functions` to send data back up to a parent.
-- removes `coupling` between components
-- improves `performance` as the data no longer has to be passed down through multiple levels of components and cause re-rendering
+### autorun & reactions
+- when to use `autorun` & `reaction` comparing to `useEffect`? 
+    - `useEffect` is much more cleaner 
+https://github.com/mobxjs/mobx-react/issues/772 
 
-# Summary [55-60] @Karol
-- React vs boilerplate: Redux offers a trade-off. It asks you to:
-    - Describe application state as plain objects and arrays.
-    - Describe changes in the system as plain objects.
-    - Describe the logic for handling changes as pure function
-- Use redux for medium and bigger projects. 
-    - in a `small application` there are few `parent-child` relationships 
-    - and sharing of the `same data` is not widely used among different components
-    - so using `local state` in those cases is equally fine
-- Do not keep all all application data in Redux.  
-    - consider keeping all User Interface (UI) related data and data not needed in more than one component in local state.
-- Support & great community
-- Cross platforms
-    - Selfridges: CogJs + Redux + Reselect + Thunk
-    - Angular (ngrx)
-- Extensions via middlewares
-- Side effects (thunk? saga? rxjs?)
-- Splitting Reducers
-    - you can start with a single reducer, and as your app grows, split it off into smaller reducers that manage specific parts of the state tree
-    
-## What can be achieved thanks to Redux
-- see: https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367
+## Asynchronous actions
+https://mobx.js.org/best/actions.html
+
+- async actions
+    - if action strict mode is on you cannot modify the state in the callback (either using `then()` or `async/await`)
+    - you can work around this by having `@action` for callbacks or to wrap callback with `action()` or `runInAction`
+    - but the simplier way is to just to use `@action` to modify the state
+- nicer approach using `flows` 
+
+## Modifiers
+- observable.deep vs observable.shallow
+    - @MJ example with fetching data from web that we don't really what to observer deeply
+- computed vs computed.struct
+https://mobx.js.org/refguide/modifiers.html
+
+## Intercept & Observe TBD 
+https://mobx.js.org/refguide/observe.html
+
+# Mobx-React
+
+## Observing
+- 3 ways: observer HOC, Observer component, useObserver
+https://mobx-react.js.org/observe-how
+
+## Managing state
+### Creating state
+- observable(value) or @observable classProperty = value
+https://mobx.js.org/refguide/observable.html
+
+- useLocalState (only in functional components)
+"Note that using a local store might conflict with future React features like concurrent rendering."
+https://mobx-react.js.org/state-local
+
+- tree state: https://github.com/mobxjs/mobx-state-tree
+
+## Accessing complex & global stores
+https://mobx-react.js.org/recipes-context#complex-stores
+
+- one context containing different observable and then using hooks to extract to hide structure
+- or by different contexts
+- or tree state: https://github.com/mobxjs/mobx-state-tree
+
+# Other topics
+- strict mode will restrict that state cannot be modified outside of actions
+https://mobx.js.org/refguide/api##-enforceactions-
+- if you cannot use decorators see decorate API
+https://mobx.js.org/refguide/modifiers.html
+
+# Follow-up topics
+- tree state: might be interesting
+https://github.com/mobxjs/mobx-state-tree
+- server-side rendering TBD
+
+# References
+- Compare and battle the paradigm
+https://www.youtube.com/watch?v=76FRrbY18Bs
+
+- Redux is "susceptible to oversubscribing"
+"Coarse grained subscriptions like Flux-style store subscriptions are very susceptible to oversubscribing. 
+When using React, you can simply tell whether your components are oversubscribing by printing wasted renderings. MobX will reduce this number to zero.
+https://medium.com/@tylerwclark/the-why-behind-mobx-3e8555b1d60b
+
+# Our notes
+- Mobx has more features than Redux 
+- Redux is lighter than Mobx
+- Redux is used wider but Mobx is battle field tested actually:
+https://github.com/mobxjs/mobx/issues/681
+

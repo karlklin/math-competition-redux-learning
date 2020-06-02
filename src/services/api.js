@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 
 export const api = {
     addAnswer: answer => new Promise(resolve => setTimeout(() => resolve(answer), 1000)),
