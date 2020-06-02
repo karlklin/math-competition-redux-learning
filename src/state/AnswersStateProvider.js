@@ -1,5 +1,5 @@
 import React, {createContext, useContext} from 'react';
-import {createAnswersState} from "./createAnswersState";
+import {AnswersState} from "./AnswersState";
 import {configure} from 'mobx';
 
 const AnswersStateContext = createContext(null);
@@ -11,7 +11,7 @@ configure({
 export const AnswersStateProvider = ({children}) => {
     // another option is to use component local store
     // const answersState = useLocalAnswersState();
-    const answersState = createAnswersState();
+    const answersState = new AnswersState();
     return <AnswersStateContext.Provider value={answersState}>{children}</AnswersStateContext.Provider>
 };
 

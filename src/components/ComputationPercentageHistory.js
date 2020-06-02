@@ -15,7 +15,7 @@ export const ComputationPercentageHistory = observer(() => {
                 Substracting: <PercentageTotalResult result={answers.percentageOfDifferenceCorrect}/>
             </div>
             <div className="multiplication">
-                Multiplication: <PercentageTotalResult result={answers.pecentageOfProductCorrect}/>
+                Multiplication: <PercentageTotalResult result={answers.percentageOfProductCorrect}/>
             </div>
         </>
     );

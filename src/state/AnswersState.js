@@ -2,7 +2,7 @@ import {computed, observable, runInAction, action} from 'mobx';
 import {isCorrect} from "../services/competitionHelper";
 import {api} from '../services/api';
 
-class Answers {
+export class AnswersState {
 
     @observable list = [
         {id: 1, a: 5, b: 10, operator: '+', answer: 15},
@@ -63,7 +63,7 @@ class Answers {
         return this.percentageOfCorrect(this.differenceAnswers);
     }
 
-    @computed get pecentageOfProductCorrect() {
+    @computed get percentageOfProductCorrect() {
         return this.percentageOfCorrect(this.productAnswers);
     }
 
@@ -130,5 +130,3 @@ class Answers {
         return this.list.find(answer => answer.id === id);
     }
 }
-
-export const createAnswersState = () => new Answers();
