@@ -18,11 +18,14 @@ const answersState = observable([
     {id: 3, a: 5, b: 10, operator: '*', answer: 10},
 ]);
 
-// Step1 - introduce observable answersState
+// Step1 - introduce observable answersState and change History related components to observers
+// Step2 - change Favourite related components to observers
 
 // Notes:
 // - switch from function to array function for Components
-// - rething removing AnswerState from start2 version
+// - implemenet fix when item is delete then unlike the item as well (this is not really related with mobx)
+// - rethink removing AnswerState from start2 version
+// - rethink implementation for loading state (change to inside useAnswers and useFavourites hooks)
 
 export const CompetitionManager = observer(() => {
     const [api, isLoading] = useApi();
@@ -72,7 +75,7 @@ const useAnswers = (answerState, api) => {
     };
     const deleteAnswer = async id => {
         const resultId = await api.deleteAnswer(id);
-        const index = answerState.findIndex(item => item.id !== resultId);
+        const index = answerState.findIndex(item => item.id === resultId);
         answersState.splice(index, 1);
     };
     return [answerState, addAnswer, deleteAnswer];

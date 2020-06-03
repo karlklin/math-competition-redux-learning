@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import {correctAnswer, isCorrect} from '../services/competitionHelper';
+import {observer} from "mobx-react";
 
-export function HistoryLogItem({item, isLike, deleteAnswer, likeAnswer, unlikeAnswer}) {
+export const HistoryLogItem = observer(({item, isLike, deleteAnswer, likeAnswer, unlikeAnswer}) => {
 
     const correct = isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
@@ -21,7 +22,10 @@ export function HistoryLogItem({item, isLike, deleteAnswer, likeAnswer, unlikeAn
     const isToEdit = !correct && !editor;
     const isInEdit = !correct && editor;
 
-    const onDelete = () => deleteAnswer(item.id);
+    const onDelete = () => {
+        deleteAnswer(item.id);
+        unlikeAnswer(item.id);
+    };
     const onLike = () => likeAnswer(item);
     const onUnlike = () => unlikeAnswer(item.id);
 
@@ -42,7 +46,7 @@ export function HistoryLogItem({item, isLike, deleteAnswer, likeAnswer, unlikeAn
             { isInEdit ? <input type="number" onKeyPress={submit} ref={newValue} /> : null }
         </div>
     );
-}
+});
 
 const useToggle = initial => {
     const [toggled, setToggled] = useState(initial);
