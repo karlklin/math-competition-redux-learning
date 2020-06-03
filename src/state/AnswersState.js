@@ -73,38 +73,38 @@ export class AnswersState {
 
     @action async addAnswer(answer) {
         this.loading.push(true);
-        await api.addAnswer(answer)
+        const resultAnswer = await api.addAnswer(answer)
         runInAction(() => {
-            this.list.push(answer);
+            this.list.push(resultAnswer);
             this.loading.pop();
         })
     }
 
     @action async deleteAnswer(id) {
         this.loading.push(true);
-        await api.deleteAnswer(id)
+        const resultId = await api.deleteAnswer(id)
         runInAction(() => {
-            const index = this.list.findIndex(item => item.id === id);
+            const index = this.list.findIndex(item => item.id === resultId);
             index >= 0 && this.list.splice(index, 1);
-            this.unlike(id);
+            this.unlike(resultId);
             this.loading.pop();
         })
     }
 
     @action async like(answer) {
         this.loading.push(true);
-        await api.like(answer)
+        const resultAnswer = await api.like(answer)
         runInAction(() => {
-            this.favourites.push(answer);
+            this.favourites.push(resultAnswer);
             this.loading.pop();
         })
     }
 
     @action async unlike(id) {
         this.loading.push(true);
-        await api.unlike(id)
+        const resultId = await api.unlike(id)
         runInAction(() => {
-            const index = this.favourites.findIndex(item => item.id === id);
+            const index = this.favourites.findIndex(item => item.id === resultId);
             index >= 0 && this.favourites.splice(index, 1);
             this.loading.pop();
         })
@@ -112,9 +112,9 @@ export class AnswersState {
 
     @action async updateAnswer(id, newAnswer) {
         this.loading.push(true);
-        await api.updateAnswer(id, newAnswer);
+        const resultId = await api.updateAnswer(id, newAnswer);
         runInAction(() => {
-            const answer = this.findById(id);
+            const answer = this.findById(resultId);
             if(answer) {
                 answer.answer = newAnswer;
             }
