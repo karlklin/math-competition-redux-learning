@@ -18,14 +18,14 @@ const answersState = observable([
     {id: 3, a: 5, b: 10, operator: '*', answer: 10},
 ]);
 
+const favouritesState = observable([]);
+
 // Step1 - introduce observable answersState and change History related components to observers
-// Step2 - change Favourite related components to observers
+// Step2 - change Favourite related components to observers [WORKING STATE]
+// Step3 - introduce observable favouritesState
 
 // Notes:
-// - switch from function to array function for Components
-// - implemenet fix when item is delete then unlike the item as well (this is not really related with mobx)
-// - rethink removing AnswerState from start2 version
-// - rethink implementation for loading state (change to inside useAnswers and useFavourites hooks)
+// - change implementation for loading state (change this as well as state then to be changed to observable)
 
 export const CompetitionManager = observer(() => {
     const [api, isLoading] = useApi();
@@ -37,7 +37,7 @@ export const CompetitionManager = observer(() => {
     };
 
     const [answers, addAnswer, deleteAnswer] = useAnswers(answersState, api);
-    const [favourites, addLike, removeLike] = useFavourites(api);
+    const [favourites, addLike, removeLike] = useFavourites(favouritesState, api);
 
     return (
         <div>
@@ -81,16 +81,16 @@ const useAnswers = (answerState, api) => {
     return [answerState, addAnswer, deleteAnswer];
 };
 
-const useFavourites = (api, initial = []) => {
-    const [favourites, setFavourite] = useState(initial);
+const useFavourites = (favouriteState, api) => {
     const addLike = async answer => {
         const resultAnswer = await api.like(answer);
-        setFavourite([...favourites, resultAnswer]);
+        favouriteState.push(resultAnswer);
     };
     const removeLike = async id => {
         const resultId = await api.unlike(id);
-        setFavourite(favourites.filter(item => item.id !== resultId));
+        const index = favouriteState.findIndex(item => item.id === resultId);
+        favouriteState.splice(index, 1);
     };
 
-    return [favourites, addLike, removeLike];
+    return [favouriteState, addLike, removeLike];
 };
