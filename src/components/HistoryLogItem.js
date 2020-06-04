@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import {correctAnswer, isCorrect} from '../services/competitionHelper';
 
-export const HistoryLogItem = ({item, isLike, deleteAnswer, likeAnswer, unlikeAnswer}) => {
+export const HistoryLogItem = ({item, isLike, deleteAnswer, addLike, removeLike}) => {
     const correct = isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
     const newValue = useRef(item.answer);
@@ -22,10 +22,10 @@ export const HistoryLogItem = ({item, isLike, deleteAnswer, likeAnswer, unlikeAn
 
     const onDelete = () => {
         deleteAnswer(item.id);
-        unlikeAnswer(item.id);
+        removeLike(item.id);
     };
-    const onLike = () => likeAnswer(item);
-    const onUnlike = () => unlikeAnswer(item.id);
+    const onLike = () => addLike(item);
+    const onUnlike = () => removeLike(item.id);
 
     return (
         <div className={correct ? 'history-log-item correct' : 'history-log-item wrong'}>

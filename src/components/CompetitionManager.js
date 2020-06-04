@@ -41,13 +41,13 @@ export const CompetitionManager = () => {
             <div className="container">
                 <Header answers={answers}/>
                 <Competition difficulty={difficulty}
-                             onAnswer={addAnswer}/>
+                             addAnswer={addAnswer}/>
                 <PercentageHistory answers={answers}/>
                 <HistoryLog history={answers}
                             deleteAnswer={deleteAnswer}
                             favourites={favourites}
-                            likeAnswer={addLike}
-                            unlikeAnswer={removeLike}/>
+                            addLike={addLike}
+                            removeLike={removeLike}/>
                 <Favourites items={favourites}/>
             </div>
             <Loading isLoading={loading.length > 0}/>

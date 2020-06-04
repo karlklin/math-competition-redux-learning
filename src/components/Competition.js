@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-export const Competition = ({ onAnswer, difficulty }) => {
+export const Competition = ({ addAnswer, difficulty }) => {
     const [data, setData] = useState(newCompetition(difficulty));
 
     const submit = e => {
         if(e.key === 'Enter' && e.target.value !== '') {
-            onAnswer({...data, answer: parseInt(e.target.value, 10)});
+            addAnswer({...data, answer: parseInt(e.target.value, 10)});
             setData(newCompetition(difficulty));
             e.target.value = '';
         }
