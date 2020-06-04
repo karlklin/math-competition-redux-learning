@@ -6,9 +6,9 @@ import {HistoryLog} from './HistoryLog';
 import {Favourites} from "./Favourites";
 import {Loading} from "./Loading";
 import {PageTitle} from "./PageTitle";
-import {useApi} from '../services/api';
 import {observable} from "mobx";
 import {observer} from "mobx-react";
+import {api} from "../services/api";
 
 const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -28,7 +28,7 @@ const favouritesState = observable([]);
 // - change implementation for loading state (change this as well as state then to be changed to observable)
 
 export const CompetitionManager = observer(() => {
-    const [api, isLoading] = useApi();
+    const [loading, setLoading] = useState([]);
 
     const [difficulty, setDifficulty] = useState(5);
     const updateDifficulty = num => e => {
@@ -36,8 +36,8 @@ export const CompetitionManager = observer(() => {
         e.preventDefault();
     };
 
-    const [answers, addAnswer, deleteAnswer] = useAnswers(answersState, api);
-    const [favourites, addLike, removeLike] = useFavourites(favouritesState, api);
+    const [answers, addAnswer, deleteAnswer] = useAnswers(answersState, loading, setLoading);
+    const [favourites, addLike, removeLike] = useFavourites(favouritesState, loading, setLoading);
 
     return (
         <div>
@@ -62,34 +62,41 @@ export const CompetitionManager = observer(() => {
                             unlikeAnswer={removeLike}/>
                 <Favourites items={favourites}/>
             </div>
-            <Loading isLoading={isLoading}/>
+            <Loading isLoading={loading.length > 0}/>
             <PageTitle answers={answers}/>
         </div>
     );
 });
 
-const useAnswers = (answerState, api) => {
+const useAnswers = (answerState, loading, setLoading) => {
     const addAnswer = async answer => {
+        setLoading([...loading, true]);
         const resultAnswer = await api.addAnswer(answer);
         answersState.push(resultAnswer);
     };
     const deleteAnswer = async id => {
+        setLoading([...loading, true]);
         const resultId = await api.deleteAnswer(id);
         const index = answerState.findIndex(item => item.id === resultId);
         answersState.splice(index, 1);
+        setLoading(loading.slice(0, loading.length-2));
     };
     return [answerState, addAnswer, deleteAnswer];
 };
 
-const useFavourites = (favouriteState, api) => {
+const useFavourites = (favouriteState, loading, setLoading) => {
     const addLike = async answer => {
+        setLoading([...loading, true]);
         const resultAnswer = await api.like(answer);
         favouriteState.push(resultAnswer);
+        setLoading(loading.slice(0, loading.length-2));
     };
     const removeLike = async id => {
+        setLoading([...loading, true]);
         const resultId = await api.unlike(id);
         const index = favouriteState.findIndex(item => item.id === resultId);
         favouriteState.splice(index, 1);
+        setLoading(loading.slice(0, loading.length-2));
     };
 
     return [favouriteState, addLike, removeLike];
