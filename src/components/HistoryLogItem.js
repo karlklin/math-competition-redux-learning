@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import {correctAnswer, isCorrect} from '../services/competitionHelper';
 import {observer} from "mobx-react";
 
-export const HistoryLogItem = observer(({item, isLike, deleteAnswer, likeAnswer, unlikeAnswer}) => {
+export const HistoryLogItem = observer(({item, isLike, answerState}) => {
 
     const correct = isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
@@ -23,11 +23,11 @@ export const HistoryLogItem = observer(({item, isLike, deleteAnswer, likeAnswer,
     const isInEdit = !correct && editor;
 
     const onDelete = () => {
-        deleteAnswer(item.id);
-        unlikeAnswer(item.id);
+        answerState.deleteAnswer(item.id);
+        answerState.removeLike(item.id);
     };
-    const onLike = () => likeAnswer(item);
-    const onUnlike = () => unlikeAnswer(item.id);
+    const onLike = () => answerState.addLike(item);
+    const onUnlike = () => answerState.removeLike(item.id);
 
     return (
         <div className={correct ? 'history-log-item correct' : 'history-log-item wrong'}>

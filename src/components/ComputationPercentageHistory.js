@@ -2,9 +2,9 @@ import React from 'react';
 import {PercentageTotalResult} from './PercentageTotalResult';
 import {observer} from "mobx-react";
 
-export const ComputationPercentageHistory = observer(({ answers }) => {
+export const ComputationPercentageHistory = observer(({ answerState }) => {
 
-    const filterBy = op => answers.filter(item => item.operator === op);
+    const filterBy = op => answerState.answers.filter(item => item.operator === op);
 
     const total = filterBy('+');
     const difference = filterBy('-');
