@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export function Competition({ onAnswer, difficulty }) {
+export const Competition = ({ onAnswer, difficulty }) => {
     const [data, setData] = useState(newCompetition(difficulty));
 
     const submit = e => {
@@ -20,7 +20,7 @@ export function Competition({ onAnswer, difficulty }) {
             <input type="number" onKeyPress={submit} />
         </div>
     );
-}
+};
 
 const newCompetition = (difficulty = 10) => {
     const operators = ['+', '-', '*'];

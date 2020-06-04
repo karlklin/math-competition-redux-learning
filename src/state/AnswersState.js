@@ -1,9 +1,8 @@
-import {computed, observable, runInAction, action} from 'mobx';
+import {runInAction} from 'mobx';
 import {isCorrect} from "../services/competitionHelper";
 import {api} from '../services/api';
 
 export class AnswersState {
-
     list = [
         {id: 1, a: 5, b: 10, operator: '+', answer: 15},
         {id: 2, a: 5, b: 10, operator: '-', answer: 10},

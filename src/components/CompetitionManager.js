@@ -10,7 +10,7 @@ import {useApi} from '../services/api';
 
 const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-export function CompetitionManager() {
+export const CompetitionManager = () => {
     const [api, isLoading] = useApi();
 
     const [difficulty, setDifficulty] = useState(5);

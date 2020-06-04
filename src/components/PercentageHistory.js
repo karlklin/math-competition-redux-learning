@@ -2,8 +2,7 @@ import React from 'react';
 import {PercentageTotalResult} from './PercentageTotalResult';
 import {ComputationPercentageHistory} from './ComputationPercentageHistory';
 
-export function PercentageHistory({answers}) {
-
+export const PercentageHistory = ({answers}) => {
     return (
         <div className="percentage-history">
             <div className="percentage-total">
@@ -14,4 +13,4 @@ export function PercentageHistory({answers}) {
             </div>
         </div>
     );
-}
+};

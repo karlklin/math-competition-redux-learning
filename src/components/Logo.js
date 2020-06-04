@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-export function Logo() {
+export const Logo = () => {
     const [animation, setAnimation] = useState(true);
     const previousAnimation = usePrevious(animation);
 
@@ -20,7 +20,7 @@ export function Logo() {
             <i className="fas fa-chess-board"></i>
         </div>
     );
-}
+};
 
 const usePrevious = (value) => {
     const ref = useRef();

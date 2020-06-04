@@ -1,7 +1,7 @@
 import React from 'react';
 import {isCorrect} from '../services/competitionHelper';
 
-export function PercentageTotalResult({ answers }) {
+export const PercentageTotalResult = ({ answers }) => {
     const allAnswers = answers.length;
     if(allAnswers === 0) {
         return null;
@@ -15,4 +15,4 @@ export function PercentageTotalResult({ answers }) {
             <span>{result} %</span>
         </div>
     );
-}
+};

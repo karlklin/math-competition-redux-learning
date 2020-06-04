@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
 import {correctAnswer, isCorrect} from '../services/competitionHelper';
 
-export function HistoryLogItem({item, isLike, deleteAnswer, likeAnswer, unlikeAnswer}) {
-
+export const HistoryLogItem = ({item, isLike, deleteAnswer, likeAnswer, unlikeAnswer}) => {
     const correct = isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
     const newValue = useRef(item.answer);
@@ -42,7 +41,7 @@ export function HistoryLogItem({item, isLike, deleteAnswer, likeAnswer, unlikeAn
             { isInEdit ? <input type="number" onKeyPress={submit} ref={newValue} /> : null }
         </div>
     );
-}
+};
 
 const useToggle = initial => {
     const [toggled, setToggled] = useState(initial);
