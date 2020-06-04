@@ -20,7 +20,10 @@ export const HistoryLogItem = ({item, isLike, deleteAnswer, likeAnswer, unlikeAn
     const isToEdit = !correct && !editor;
     const isInEdit = !correct && editor;
 
-    const onDelete = () => deleteAnswer(item.id);
+    const onDelete = () => {
+        deleteAnswer(item.id);
+        unlikeAnswer(item.id);
+    };
     const onLike = () => likeAnswer(item);
     const onUnlike = () => unlikeAnswer(item.id);
 
