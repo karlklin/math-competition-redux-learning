@@ -9,7 +9,8 @@ export const Favourites = observer(({answerState}) => {
             {answerState.favourites.map(item =>
                 <FavouriteItem
                     key={item.id}
-                    item={item}/>)}
+                    item={item}
+                    isCorrect={answerState.isCorrect(item)}/>)}
         </div>
     );
 });

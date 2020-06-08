@@ -3,8 +3,6 @@ import {HistoryLogItem} from './HistoryLogItem';
 import {observer} from "mobx-react";
 
 export const HistoryLog = observer(({answerState}) => {
-    const isLike = id => !!answerState.favourites.find(fav => fav.id === id);
-
     return (
         <div className="history-log">
             <h3>Log</h3>
@@ -12,7 +10,7 @@ export const HistoryLog = observer(({answerState}) => {
                 <HistoryLogItem
                     key={item.id}
                     item={item}
-                    isLike={isLike(item.id)}
+                    isLike={answerState.isLike(item.id)}
                     answerState={answerState}/>)}
         </div>
     );

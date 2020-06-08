@@ -3,18 +3,11 @@ import {PercentageTotalResult} from './PercentageTotalResult';
 import {observer} from "mobx-react";
 
 export const ComputationPercentageHistory = observer(({ answerState }) => {
-
-    const filterBy = op => answerState.answers.filter(item => item.operator === op);
-
-    const total = filterBy('+');
-    const difference = filterBy('-');
-    const product = filterBy('*');
-
     return (
         <>
-            <div className="adding">Adding: <PercentageTotalResult answers={total}/></div>
-            <div className="substracting">Substracting: <PercentageTotalResult answers={difference}/></div>
-            <div className="multiplication">Multiplication: <PercentageTotalResult answers={product}/></div>
+            <div className="adding">Adding: <PercentageTotalResult result={answerState.percentageOfTotalCorrect}/></div>
+            <div className="substracting">Substracting: <PercentageTotalResult result={answerState.percentageOfDifferenctCorrect}/></div>
+            <div className="multiplication">Multiplication: <PercentageTotalResult result={answerState.percentageOfProductCorrect}/></div>
         </>
     );
 });

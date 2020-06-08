@@ -18,6 +18,9 @@ const answerState = new AnswerState();
 // Step3 - introduce observable favouritesState
 // Step4 - introduce observable loading
 // Step5 - introduce AnswerState
+// Step6 - use @observable in AnswerState
+// Step7 - move all logic into @computed
+// - note: we could not bother moving just functions e.g. isLike or isCorrect
 
 // Notes:
 // - rethink difficulty as component and mobx oriented

@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
-import {correctAnswer, isCorrect} from '../services/competitionHelper';
+import React, {useRef, useState} from 'react';
+import {correctAnswer} from '../services/competitionHelper';
 import {observer} from "mobx-react";
 
 export const HistoryLogItem = observer(({item, isLike, answerState}) => {
 
-    const correct = isCorrect(item);
+    const correct = answerState.isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
     const newValue = useRef(item.answer);
 
