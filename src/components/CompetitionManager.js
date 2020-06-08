@@ -21,6 +21,7 @@ const answerState = new AnswerState();
 // Step6 - use @observable in AnswerState
 // Step7 - move all logic into @computed
 // - note: we could not bother moving just functions e.g. isLike or isCorrect
+// Step8 - enable strict mode (@action and runInAction)
 
 // Notes:
 // - rethink difficulty as component and mobx oriented

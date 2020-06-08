@@ -1,6 +1,11 @@
-import {computed, observable} from "mobx";
+import {action, computed, observable, runInAction} from "mobx";
 import {api} from "../services/api";
 import {isCorrect} from "../services/competitionHelper";
+import {configure} from 'mobx'
+
+configure({
+    enforceActions: 'observed'
+});
 
 export class AnswerState {
     @observable answers = [
@@ -57,33 +62,50 @@ export class AnswerState {
         return isCorrect(item);
     }
 
-    addAnswer = async answer => {
+    @action addAnswer = async answer => {
         this.loading.push(true);
         const resultAnswer = await api.addAnswer(answer);
-        this.answers.push(resultAnswer);
-        this.loading.pop();
+        runInAction(() => {
+            this.answers.push(resultAnswer);
+            this.loading.pop();
+        });
     };
 
-    deleteAnswer = async id => {
+    @action deleteAnswer = async id => {
         this.loading.push(true);
         const resultId = await api.deleteAnswer(id);
         const index = this.answers.findIndex(item => item.id === resultId);
-        this.answers.splice(index, 1);
-        this.loading.pop();
+        runInAction(() => {
+            this.answers.splice(index, 1);
+            this.loading.pop();
+        });
     };
 
-    addLike = async answer => {
+    @action updateAnswer = async (answer, result) => {
+        this.loading.push(true);
+        const updatedAnswer = await api.updateAnswer(answer);
+        runInAction(() => {
+            updatedAnswer.answer = result;
+            this.loading.pop();
+        });
+    };
+
+    @action addLike = async answer => {
         this.loading.push(true);
         const resultAnswer = await api.like(answer);
-        this.favourites.push(resultAnswer);
-        this.loading.pop();
+        runInAction(() => {
+            this.favourites.push(resultAnswer);
+            this.loading.pop();
+        });
     };
 
-    removeLike = async id => {
+    @action removeLike = async id => {
         this.loading.push(true);
         const resultId = await api.unlike(id);
         const index = this.favourites.findIndex(item => item.id === resultId);
-        this.favourites.splice(index, 1);
-        this.loading.pop();
+        runInAction(() => {
+            this.favourites.splice(index, 1);
+            this.loading.pop();
+        });
     };
 }
