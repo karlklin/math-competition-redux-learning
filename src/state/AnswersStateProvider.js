@@ -9,8 +9,6 @@ configure({
 });
 
 export const AnswersStateProvider = ({children}) => {
-    // another option is to use component local store
-    // const answersState = useLocalAnswersState();
     const answersState = new AnswersState();
     return <AnswersStateContext.Provider value={answersState}>{children}</AnswersStateContext.Provider>
 };
