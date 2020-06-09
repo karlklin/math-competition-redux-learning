@@ -1,19 +1,19 @@
 import React from 'react';
 import {HistoryLogItem} from './HistoryLogItem';
 import {observer} from "mobx-react";
-import {useAnswersState} from "../state/AnswersStateProvider";
+import {useAnswerState} from "../state/AnswerStateProvider";
 
 export const HistoryLog = observer(() => {
-    const answers = useAnswersState();
-
+    const answerState = useAnswerState();
     return (
         <div className="history-log">
             <h3>Log</h3>
-            {answers.answersList.map(item =>
+            {answerState.answers.map(item =>
                 <HistoryLogItem
                     key={item.id}
                     item={item}
-                    isLike={answers.isLike(item.id)}/>)}
+                    isLike={answerState.isLike(item.id)}
+                    answerState={answerState}/>)}
         </div>
     );
 });

@@ -1,17 +1,15 @@
-import React, {useState, useRef} from 'react';
-import {correctAnswer, isCorrect} from '../services/competitionHelper';
-import {useAnswersState} from "../state/AnswersStateProvider";
+import React, {useRef, useState} from 'react';
+import {correctAnswer} from '../services/competitionHelper';
 import {observer} from "mobx-react";
 
-export const HistoryLogItem = observer(({item, isLike}) => {
-    const answers = useAnswersState();
+export const HistoryLogItem = observer(({item, isLike, answerState}) => {
 
-    const correct = isCorrect(item);
+    const correct = answerState.isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
     const newValue = useRef(item.answer);
 
     const update = () => {
-        answers.updateAnswer(item.id, parseInt(newValue.current.value))
+        answerState.updateAnswer(item, parseInt(newValue.current.value));
         toggleEditor();
     };
 
@@ -24,9 +22,12 @@ export const HistoryLogItem = observer(({item, isLike}) => {
     const isToEdit = !correct && !editor;
     const isInEdit = !correct && editor;
 
-    const onDelete = () => answers.deleteAnswer(item.id);
-    const onLike = () => answers.like(item);
-    const onUnlike = () => answers.unlike(item.id);
+    const onDelete = () => {
+        answerState.deleteAnswer(item.id);
+        answerState.removeLike(item.id);
+    };
+    const onLike = () => answerState.addLike(item);
+    const onUnlike = () => answerState.removeLike(item.id);
 
     return (
         <div className={correct ? 'history-log-item correct' : 'history-log-item wrong'}>

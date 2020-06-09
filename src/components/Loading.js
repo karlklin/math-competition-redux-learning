@@ -1,8 +1,8 @@
 import React from 'react';
+import {useAnswerState} from "../state/AnswerStateProvider";
 import {observer} from "mobx-react";
-import {useAnswersState} from "../state/AnswersStateProvider";
 
 export const Loading = observer(() => {
-    const answers = useAnswersState();
-    return answers.isLoading ? <div className="loading">Loading...</div> : null;
+    const answerState = useAnswerState();
+    return answerState.isLoading ? <div className="loading">Loading...</div> : null;
 });

@@ -1,23 +1,24 @@
 import {useEffect} from 'react';
+
+import {answerState} from "../state/AnswerStateProvider";
 import {autorun} from "mobx";
-import {useAnswersState} from "../state/AnswersStateProvider";
+
+function logAnswerState() {
+    autorun(() => {
+        console.log(JSON.stringify({
+            answers: answerState.answers,
+            favourites: answerState.favourites,
+            isLoading: answerState.loading
+        }, null, 2))
+    }, {
+        scheduler: run => setTimeout(run, 3000)
+    });
+}
 
 export const Logger = () => {
-    const answers = useAnswersState();
-
-    useEffect(() =>  autorun(() => {
-        console.log(JSON.stringify({
-            list: answers.answersList,
-            favourites: answers.favouritesList,
-            allCount: answers.allCount,
-            isLoading: answers.isLoading
-        }, null, 2));
-    }, {
-        scheduler: run => {
-            setTimeout(run, 1000)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }), []);
+    useEffect(() => {
+        logAnswerState();
+    }, []);
 
     return null;
-}
+};

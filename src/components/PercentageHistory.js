@@ -2,15 +2,14 @@ import React from 'react';
 import {PercentageTotalResult} from './PercentageTotalResult';
 import {ComputationPercentageHistory} from './ComputationPercentageHistory';
 import {observer} from "mobx-react";
-import {useAnswersState} from "../state/AnswersStateProvider";
+import {useAnswerState} from "../state/AnswerStateProvider";
 
 export const PercentageHistory = observer(() => {
-    const answers = useAnswersState();
-
+    const answerState = useAnswerState();
     return (
         <div className="percentage-history">
             <div className="percentage-total">
-                <PercentageTotalResult result={answers.percentageOfAllCorrect}/>
+                <PercentageTotalResult result={answerState.percentageOfAllCorrect}/>
             </div>
             <div className="percentage-partial">
                 <ComputationPercentageHistory/>

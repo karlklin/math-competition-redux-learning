@@ -1,11 +1,13 @@
 import React from 'react';
 import {observer} from "mobx-react";
-import {useAnswersState} from "../state/AnswersStateProvider";
+import {useAnswerState} from "../state/AnswerStateProvider";
 
 export const TotalResults = observer(() => {
-    const answers = useAnswersState();
+    const answerState = useAnswerState();
+    const correct = answerState.correctCount;
+    const total = answerState.totalCount;
 
-    return answers.allCount
-        ? <div className="total-result">{answers.correctCount} / {answers.allCount}</div>
+    return total
+        ? <div className="total-result">{correct} / {total}</div>
         : null;
 });

@@ -1,18 +1,18 @@
 import React from 'react';
 import { FavouriteItem } from "./FavouriteItem";
 import {observer} from "mobx-react";
-import {useAnswersState} from "../state/AnswersStateProvider";
+import {useAnswerState} from "../state/AnswerStateProvider";
 
 export const Favourites = observer(() => {
-    const answers = useAnswersState();
-
+    const answerState = useAnswerState();
     return (
         <div className="favourites history-log">
             <h3>Favorites</h3>
-            {answers.favouritesList.map(item =>
+            {answerState.favourites.map(item =>
                 <FavouriteItem
                     key={item.id}
-                    item={item}/>)}
+                    item={item}
+                    isCorrect={answerState.isCorrect(item)}/>)}
         </div>
     );
 });

@@ -1,25 +1,24 @@
-import { useEffect } from 'react';
-import {observer} from "mobx-react";
-import {reaction} from 'mobx';
-import {useAnswersState} from "../state/AnswersStateProvider";
+import {answerState} from "../state/AnswerStateProvider";
+import {reaction} from "mobx";
+import {useEffect} from 'react';
 
-export const PageTitle = observer(() => {
-    const answers = useAnswersState();
-    // useEffect(() => autorun(() => {
-    //     document.title = answers.isLoading ? 'Loading...' : `Competitions: ${answers.allCount}`;
-    // }), []);
+function updatePageTitle() {
+    reaction(
+        () => ({
+            isLoading: answerState.isLoading,
+            length: answerState.answers.length
+        }),
+        ({isLoading, length}) => {
+            document.title = isLoading ? 'Loading...' : `Competitions: ${length}`;
+        }, {
+            fireImmediately: true
+        }
+    );
+};
 
-    useEffect(() => reaction(
-      () => ({
-          count: answers.allCount,
-          isLoading: answers.isLoading
-      }),
-      ({ isLoading, count }) => {
-          document.title = isLoading ? 'Loading...' : `Competitions: ${count}`;
-      }, {
-          fireImmediately: true
-      }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    ), []);
+export const PageTitle = () => {
+    useEffect(() => {
+        updatePageTitle()
+    }, []);
     return null;
-});
+};
