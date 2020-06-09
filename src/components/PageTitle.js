@@ -1,10 +1,24 @@
+import {answerState} from "../state/AnswerStateProvider";
+import {reaction} from "mobx";
 import {useEffect} from 'react';
-import {useAnswerState} from "../state/AnswerStateProvider";
 
-export const PageTitle = ({isLoading}) => {
-    const answerState = useAnswerState();
+function updatePageTitle() {
+    reaction(
+        () => ({
+            isLoading: answerState.isLoading,
+            length: answerState.answers.length
+        }),
+        ({isLoading, length}) => {
+            document.title = isLoading ? 'Loading...' : `Competitions: ${length}`;
+        }, {
+            fireImmediately: true
+        }
+    );
+};
+
+export const PageTitle = () => {
     useEffect(() => {
-        document.title = isLoading ? 'Loading...' : `Competitions: ${answerState.answers.length}`;
-    }, [isLoading, answerState.answers.length]);
+        updatePageTitle()
+    }, []);
     return null;
 };

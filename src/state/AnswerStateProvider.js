@@ -1,7 +1,7 @@
 import React, {createContext, useContext} from 'react';
 import {AnswerState} from "./AnswerState";
 
-const answerState = new AnswerState();
+export const answerState = new AnswerState();
 const AnswerStateContext = createContext(null);
 
 export const AnswerStateProvider = ({children}) =>

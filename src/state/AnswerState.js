@@ -54,6 +54,10 @@ export class AnswerState {
         return this.percentageOfCorrect(this.filterBy("*"))
     }
 
+    @computed get isLoading() {
+       return this.loading.length > 0
+    }
+
     isLike(id) {
         return !!this.favourites.find(fav => fav.id === id);
     }

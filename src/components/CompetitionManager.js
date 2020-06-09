@@ -4,10 +4,7 @@ import {Competition} from './Competition';
 import {PercentageHistory} from './PercentageHistory';
 import {HistoryLog} from './HistoryLog';
 import {Favourites} from "./Favourites";
-import {Loading} from "./Loading";
-import {PageTitle} from "./PageTitle";
 import {observer} from "mobx-react";
-import {useAnswerState} from "../state/AnswerStateProvider";
 
 const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -21,6 +18,7 @@ const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // - note: we could not bother moving just functions e.g. isLike or isCorrect
 // Step8 - enable strict mode (@action and runInAction)
 // Step9 - introduce AnswerStateProvider
+// Step10 - autorun & reactions: Logger & PageTitle
 
 // Notes:
 // - rethink difficulty as component and mobx oriented
@@ -31,9 +29,6 @@ export const CompetitionManager = observer(() => {
         setDifficulty(num);
         e.preventDefault();
     };
-
-    const answerState = useAnswerState();
-    const isLoading = answerState.loading.length > 0;
 
     return (
         <div>
@@ -53,8 +48,6 @@ export const CompetitionManager = observer(() => {
                 <HistoryLog/>
                 <Favourites/>
             </div>
-            <Loading isLoading={isLoading}/>
-            <PageTitle isLoading={isLoading}/>
         </div>
     );
 });
