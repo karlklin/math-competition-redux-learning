@@ -7,21 +7,20 @@ import {Favourites} from "./Favourites";
 import {Loading} from "./Loading";
 import {PageTitle} from "./PageTitle";
 import {observer} from "mobx-react";
-import {AnswerState} from "../state/AnswerState";
+import {useAnswerState} from "../state/AnswerStateProvider";
 
 const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-const answerState = new AnswerState();
 
 // Step1 - introduce observable answersState and change History related components to observers
 // Step2 - change Favourite related components to observers [WORKING STATE]
 // Step3 - introduce observable favouritesState
 // Step4 - introduce observable loading
 // Step5 - introduce AnswerState
-// Step6 - use @observable in AnswerState
+// Step6 - use @observable decorator in AnswerState
 // Step7 - move all logic into @computed
 // - note: we could not bother moving just functions e.g. isLike or isCorrect
 // Step8 - enable strict mode (@action and runInAction)
+// Step9 - introduce AnswerStateProvider
 
 // Notes:
 // - rethink difficulty as component and mobx oriented
@@ -33,6 +32,7 @@ export const CompetitionManager = observer(() => {
         e.preventDefault();
     };
 
+    const answerState = useAnswerState();
     const isLoading = answerState.loading.length > 0;
 
     return (
@@ -47,16 +47,14 @@ export const CompetitionManager = observer(() => {
                 )}
             </div>
             <div className="container">
-                <Header answerState={answerState}/>
-                <Competition difficulty={difficulty}
-                             answerState={answerState}/>
-                <PercentageHistory answerState={answerState}/>
-                <HistoryLog answerState={answerState}/>
-                <Favourites answerState={answerState}/>
+                <Header/>
+                <Competition difficulty={difficulty}/>
+                <PercentageHistory/>
+                <HistoryLog/>
+                <Favourites/>
             </div>
             <Loading isLoading={isLoading}/>
-            <PageTitle answerState={answerState}
-                       isLoading={isLoading}/>
+            <PageTitle isLoading={isLoading}/>
         </div>
     );
 });

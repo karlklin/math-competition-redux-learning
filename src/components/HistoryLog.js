@@ -1,8 +1,10 @@
 import React from 'react';
 import {HistoryLogItem} from './HistoryLogItem';
 import {observer} from "mobx-react";
+import {useAnswerState} from "../state/AnswerStateProvider";
 
-export const HistoryLog = observer(({answerState}) => {
+export const HistoryLog = observer(() => {
+    const answerState = useAnswerState();
     return (
         <div className="history-log">
             <h3>Log</h3>

@@ -1,7 +1,9 @@
 import React from 'react';
 import {observer} from "mobx-react";
+import {useAnswerState} from "../state/AnswerStateProvider";
 
-export const TotalResults = observer(({answerState}) => {
+export const TotalResults = observer(() => {
+    const answerState = useAnswerState();
     const correct = answerState.correctCount;
     const total = answerState.totalCount;
 
