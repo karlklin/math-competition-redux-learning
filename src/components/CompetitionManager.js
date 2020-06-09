@@ -19,6 +19,7 @@ const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // Step8 - enable strict mode (@action and runInAction)
 // Step9 - introduce AnswerStateProvider
 // Step10 - autorun & reactions: Logger & PageTitle
+// Step11 - useLocalStore & useAsObservableSource
 
 // Notes:
 // - rethink difficulty as component and mobx oriented

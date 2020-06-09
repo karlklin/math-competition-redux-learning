@@ -1,28 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {useAnswerState} from "../state/AnswerStateProvider";
+import {observer, useAsObservableSource, useLocalStore} from 'mobx-react';
+import {runInAction} from "mobx";
 
-export function Competition({difficulty}) {
+export const Competition = observer(({difficulty}) => {
     const answerState = useAnswerState();
-    const [data, setData] = useState(newCompetition(difficulty));
+    const difficultyState = useAsObservableSource({difficulty});
+    const competitionState = useLocalStore(() => ({
+        competition: newCompetition(difficultyState.difficulty),
+        next() {
+            runInAction(() => {
+                this.competition = newCompetition(difficultyState.difficulty);
+            });
+        }
+    }));
 
     const submit = e => {
         if (e.key === 'Enter' && e.target.value !== '') {
-            answerState.addAnswer({...data, answer: parseInt(e.target.value, 10)});
-            setData(newCompetition(difficulty));
+            answerState.addAnswer({...competitionState.competition, answer: parseInt(e.target.value, 10)});
+            competitionState.next();
             e.target.value = '';
         }
     };
 
     return (
         <div className="competition">
-            <span className="a">{data.a}</span>
-            <span className="operator">{data.operator}</span>
-            <span className="b">{data.b}</span>
+            <span className="a">{competitionState.competition.a}</span>
+            <span className="operator">{competitionState.competition.operator}</span>
+            <span className="b">{competitionState.competition.b}</span>
             <span className="equal">=</span>
             <input type="number" onKeyPress={submit}/>
         </div>
     );
-}
+});
 
 const newCompetition = (difficulty = 10) => {
     const operators = ['+', '-', '*'];

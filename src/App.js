@@ -6,7 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import {AnswerStateProvider} from "./state/AnswerStateProvider";
 import {Loading} from "./components/Loading";
 import {PageTitle} from "./components/PageTitle";
-import {Logger} from "./logger/Logger";
+import {Logger} from "./logging/Logger";
 
 function App() {
   return (
