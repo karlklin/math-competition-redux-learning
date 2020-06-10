@@ -19,11 +19,8 @@ import {runInAction} from "mobx";
 // Step8 - enable strict mode (@action and runInAction)
 // Step9 - introduce AnswerStateProvider
 // Step10 - autorun & reactions: Logger & PageTitle
-// Step11 - useLocalStore & useAsObservableSource\
+// Step11 - useLocalStore & useAsObservableSource
 // Step12 - refactor Difficulty & difficultyState as useLocalStore
-
-// Notes:
-// - rethink difficulty as component and mobx oriented
 
 export const CompetitionManager = observer(() => {
     const difficultyState = useLocalStore(() => ({

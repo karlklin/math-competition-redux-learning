@@ -3,7 +3,7 @@ import {reaction} from "mobx";
 import {useEffect} from 'react';
 
 function updatePageTitle() {
-    reaction(
+    return reaction(
         () => ({
             isLoading: answerState.isLoading,
             length: answerState.answers.length
@@ -18,7 +18,7 @@ function updatePageTitle() {
 
 export const PageTitle = () => {
     useEffect(() => {
-        updatePageTitle()
+        return updatePageTitle()
     }, []);
     return null;
 };

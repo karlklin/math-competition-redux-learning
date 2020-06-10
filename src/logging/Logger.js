@@ -4,7 +4,7 @@ import {answerState} from "../state/AnswerStateProvider";
 import {autorun} from "mobx";
 
 function logAnswerState() {
-    autorun(() => {
+     return autorun(() => {
         console.log(JSON.stringify({
             answers: answerState.answers,
             favourites: answerState.favourites,
@@ -16,9 +16,6 @@ function logAnswerState() {
 }
 
 export const Logger = () => {
-    useEffect(() => {
-        logAnswerState();
-    }, []);
-
+    useEffect(() => logAnswerState(), []);
     return null;
 };
