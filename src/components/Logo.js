@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-export function Logo() {
+export const Logo = () => {
     const [animation, setAnimation] = useState(true);
     const previousAnimation = usePrevious(animation);
 

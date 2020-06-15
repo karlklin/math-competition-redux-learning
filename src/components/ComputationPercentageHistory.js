@@ -1,7 +1,7 @@
 import React from 'react';
 import {PercentageTotalResult} from './PercentageTotalResult';
 
-export function ComputationPercentageHistory({ answers }) {
+export const ComputationPercentageHistory = ({ answers }) => {
 
     const filterBy = op => answers.filter(item => item.operator === op);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { correctAnswer, isCorrect } from "../services/competitionHelper";
 
-export function FavouriteItem({item}) {
+export const FavouriteItem = ({item}) => {
     const correct = isCorrect(item);
 
     return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export function Competition({ onAnswer, difficulty }) {
+export const Competition = ({ onAnswer, difficulty }) => {
     const [data, setData] = useState(newCompetition(difficulty));
 
     const submit = e => {

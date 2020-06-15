@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import {correctAnswer, isCorrect} from '../services/competitionHelper';
 
-export function HistoryLogItem({item, isLike, deleteAnswer, likeAnswer, unlikeAnswer}) {
+export const HistoryLogItem = ({item, isLike, deleteAnswer, likeAnswer, unlikeAnswer}) => {
 
     const correct = isCorrect(item);
     const [editor, toggleEditor] = useToggle(false);
