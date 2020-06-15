@@ -20,7 +20,7 @@ export const Logo = () => {
             <i className="fas fa-chess-board"></i>
         </div>
     );
-}
+};
 
 const usePrevious = (value) => {
     const ref = useRef();

@@ -15,4 +15,4 @@ export const PercentageTotalResult = ({ answers }) => {
             <span>{result} %</span>
         </div>
     );
-}
+};

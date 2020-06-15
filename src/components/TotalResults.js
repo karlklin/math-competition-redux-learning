@@ -10,4 +10,4 @@ export const TotalResults = ({ answers }) => {
         ? <div className="total-result">{correct} / {total}</div>
         : null
     ;
-}
+};

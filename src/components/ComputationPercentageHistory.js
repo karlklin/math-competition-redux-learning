@@ -2,7 +2,6 @@ import React from 'react';
 import {PercentageTotalResult} from './PercentageTotalResult';
 
 export const ComputationPercentageHistory = ({ answers }) => {
-
     const filterBy = op => answers.filter(item => item.operator === op);
 
     const total = filterBy('+');
@@ -16,4 +15,4 @@ export const ComputationPercentageHistory = ({ answers }) => {
             <div className="multiplication">Multiplication: <PercentageTotalResult answers={product}/></div>
         </>
     );
-}
+};

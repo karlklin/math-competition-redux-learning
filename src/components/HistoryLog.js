@@ -1,8 +1,7 @@
 import React from 'react';
 import {HistoryLogItem} from './HistoryLogItem';
 
-export const HistoryLog = ({history, favourites, deleteAnswer, likeAnswer, unlikeAnswer}) => {
-
+export const HistoryLog = ({history, favourites, deleteAnswer, addLike, removeLike}) => {
     const isLike = id => !!favourites.find(fav => fav.id === id);
 
     return (
@@ -14,8 +13,8 @@ export const HistoryLog = ({history, favourites, deleteAnswer, likeAnswer, unlik
                     item={item}
                     isLike={isLike(item.id)}
                     deleteAnswer={deleteAnswer}
-                    likeAnswer={likeAnswer}
-                    unlikeAnswer={unlikeAnswer} />)}
+                    addLike={addLike}
+                    removeLike={removeLike} />)}
         </div>
     );
-}
+};

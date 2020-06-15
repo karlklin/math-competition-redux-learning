@@ -3,7 +3,6 @@ import {PercentageTotalResult} from './PercentageTotalResult';
 import {ComputationPercentageHistory} from './ComputationPercentageHistory';
 
 export const PercentageHistory = ({answers}) => {
-
     return (
         <div className="percentage-history">
             <div className="percentage-total">
@@ -14,4 +13,4 @@ export const PercentageHistory = ({answers}) => {
             </div>
         </div>
     );
-}
+};
