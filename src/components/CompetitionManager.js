@@ -7,17 +7,12 @@ import {Favourites} from "./Favourites";
 import {Loading} from "./Loading";
 import {PageTitle} from "./PageTitle";
 import {api} from '../services/api';
-
-const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+import {Difficulty} from "./Difficulty";
 
 export const CompetitionManager = () => {
     const [loading, setLoading] = useState([]);
 
-    const [difficulty, setDifficulty] = useState(5);
-    const updateDifficulty = num => e => {
-        setDifficulty(num);
-        e.preventDefault();
-    };
+    const [difficulty, updateDifficulty, difficulties] = useDifficulties(5);
 
     const [answers, addAnswer, deleteAnswer] = useAnswers([
         {id: 1, a: 5, b: 10, operator: '+', answer: 15},
@@ -29,15 +24,9 @@ export const CompetitionManager = () => {
 
     return (
         <div>
-            <div className="difficulty">
-                Difficulty:
-                {difficulties.map(num =>
-                    <a key={num}
-                       href="/#"
-                       className={difficulty === num ? 'active' : ''}
-                       onClick={updateDifficulty(num)}>{num}</a>
-                )}
-            </div>
+            <Difficulty difficulty={difficulty}
+                        updateDifficulty={updateDifficulty}
+                        difficulties={difficulties}/>
             <div className="container">
                 <Header answers={answers}/>
                 <Competition difficulty={difficulty}
@@ -90,3 +79,14 @@ const useFavourites = (initial, loading, setLoading) => {
 
     return [favourites, addLike, removeLike];
 };
+
+const useDifficulties = initial => {
+    const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const [difficulty, setDifficulty] = useState(initial);
+    const updateDifficulty = num => e => {
+        setDifficulty(num);
+        e.preventDefault();
+    };
+
+    return [difficulty, updateDifficulty, difficulties]
+}
