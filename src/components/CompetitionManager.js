@@ -39,7 +39,7 @@ export const CompetitionManager = () => {
                             removeLike={removeLike}/>
                 <Favourites items={favourites}/>
             </div>
-            <Loading isLoading={loading.length > 0}/>
+            <Loading loading={loading}/>
             <PageTitle answers={answers}/>
         </div>
     );
