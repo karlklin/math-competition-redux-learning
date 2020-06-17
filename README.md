@@ -21,6 +21,8 @@ and expresses the intention of a function to modify state."
 
 ## Computed
 - default is to use @Computed for getters
+- computed property won't re-run if none of the data used in the previous computation changed.
+- automatic suspension: If a computed value is no longer observed, for example the UI in which it was used no longer exists, MobX can automatically garbage collect it.
 
 ## Side effects
 - this one is tricky. Basically they are saying to use only mobx reactivity in side effects 
@@ -37,7 +39,7 @@ https://mobx.js.org/best/actions.html
 - async actions
     - if action strict mode is on you cannot modify the state in the callback (either using `then()` or `async/await`)
     - you can work around this by having `@action` for callbacks or to wrap callback with `action()` or `runInAction`
-    - but the simplier way is to just to use `@action` to modify the state
+    - but the simpler way is to just to use `@action` to modify the state
 - nicer approach using `flows` 
 
 ## Modifiers
