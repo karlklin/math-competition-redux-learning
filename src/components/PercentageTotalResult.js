@@ -1,7 +1,8 @@
 import React from 'react';
 import {isCorrect} from '../services/competitionHelper';
+import {observer} from "mobx-react";
 
-export const PercentageTotalResult = ({ answers }) => {
+export const PercentageTotalResult = observer(({ answers }) => {
     const allAnswers = answers.length;
     if(allAnswers === 0) {
         return null;
@@ -15,4 +16,4 @@ export const PercentageTotalResult = ({ answers }) => {
             <span>{result} %</span>
         </div>
     );
-};
+});

@@ -1,7 +1,8 @@
 import React from 'react';
 import {HistoryLogItem} from './HistoryLogItem';
+import {observer} from "mobx-react";
 
-export const HistoryLog = ({history, favourites, deleteAnswer, addLike, removeLike}) => {
+export const HistoryLog = observer(({history, favourites, deleteAnswer, addLike, removeLike}) => {
     const isLike = id => !!favourites.find(fav => fav.id === id);
 
     return (
@@ -17,4 +18,4 @@ export const HistoryLog = ({history, favourites, deleteAnswer, addLike, removeLi
                     removeLike={removeLike} />)}
         </div>
     );
-};
+});

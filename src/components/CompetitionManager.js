@@ -8,19 +8,22 @@ import {Loading} from "./Loading";
 import {PageTitle} from "./PageTitle";
 import {api} from '../services/api';
 import {Difficulty} from "./Difficulty";
+import {observable} from "mobx";
+
+const answersState = observable([
+    {id: 1, a: 5, b: 10, operator: '+', answer: 15},
+    {id: 2, a: 5, b: 10, operator: '-', answer: 10},
+    {id: 3, a: 5, b: 10, operator: '*', answer: 10},
+]);
+
+const loadingState = observable([]);
+
+const favouritesState = observable([]);
 
 export const CompetitionManager = () => {
-    const [loading, setLoading] = useState([]);
-
     const [difficulty, updateDifficulty, difficulties] = useDifficulties(5);
-
-    const [answers, addAnswer, deleteAnswer] = useAnswers([
-        {id: 1, a: 5, b: 10, operator: '+', answer: 15},
-        {id: 2, a: 5, b: 10, operator: '-', answer: 10},
-        {id: 3, a: 5, b: 10, operator: '*', answer: 10},
-    ], loading, setLoading);
-
-    const [favourites, addLike, removeLike] = useFavourites([], loading, setLoading);
+    const [answers, addAnswer, deleteAnswer] = useAnswers(answersState, loadingState);
+    const [favourites, addLike, removeLike] = useFavourites(favouritesState, loadingState);
 
     return (
         <div>
@@ -39,42 +42,40 @@ export const CompetitionManager = () => {
                             removeLike={removeLike}/>
                 <Favourites items={favourites}/>
             </div>
-            <Loading loading={loading}/>
+            <Loading loading={loadingState}/>
             <PageTitle answers={answers}/>
         </div>
     );
 };
 
-const useAnswers = (initial, loading, setLoading) => {
-    const [answers, setAnswers] = useState(initial);
+const useAnswers = (answers, loading) => {
     const addAnswer = async answer => {
-        setLoading([...loading, true]);
+        loading.push(true);
         const resultAnswer = await api.addAnswer(answer);
-        setAnswers([...answers, resultAnswer]);
-        setLoading(loading.slice(0, loading.length-2));
+        answers.push(resultAnswer);
+        loading.pop();
     };
     const deleteAnswer = async id => {
-        setLoading([...loading, true]);
+        loading.push(true);
         const resultId = await api.deleteAnswer(id);
-        setAnswers(answers.filter(item => item.id !== resultId));
-        setLoading(loading.slice(0, loading.length-2));
+        answers.splice(answers.findIndex(item => item.id === resultId), 0);
+        loading.pop();
     };
     return [answers, addAnswer, deleteAnswer];
 };
 
-const useFavourites = (initial, loading, setLoading) => {
-    const [favourites, setFavourite] = useState(initial);
+const useFavourites = (favourites, loading) => {
     const addLike = async answer => {
-        setLoading([...loading, true]);
+        loading.push(true);
         const resultAnswer = await api.like(answer);
-        setFavourite([...favourites, resultAnswer]);
-        setLoading(loading.slice(0, loading.length-2));
+        favourites.push(resultAnswer);
+        loading.pop();
     };
     const removeLike = async id => {
-        setLoading([...loading, true]);
+        loading.push(true);
         const resultId = await api.unlike(id);
-        setFavourite(favourites.filter(item => item.id !== resultId));
-        setLoading(loading.slice(0, loading.length-2));
+        favourites.splice(favourites.findIndex(item => item.id === resultId), 0);
+        loading.pop();
     };
 
     return [favourites, addLike, removeLike];

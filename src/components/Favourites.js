@@ -1,7 +1,8 @@
 import React from 'react';
 import { FavouriteItem } from "./FavouriteItem";
+import {observer} from "mobx-react";
 
-export const Favourites = ({items}) => {
+export const Favourites = observer(({items}) => {
     return (
         <div className="favourites history-log">
             <h3>Favorites</h3>
@@ -11,4 +12,4 @@ export const Favourites = ({items}) => {
                     item={item}/>)}
         </div>
     );
-};
+});

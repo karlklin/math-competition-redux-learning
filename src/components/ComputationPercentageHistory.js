@@ -1,7 +1,8 @@
 import React from 'react';
 import {PercentageTotalResult} from './PercentageTotalResult';
+import {observer} from "mobx-react";
 
-export const ComputationPercentageHistory = ({ answers }) => {
+export const ComputationPercentageHistory = observer(({ answers }) => {
     const filterBy = op => answers.filter(item => item.operator === op);
 
     const total = filterBy('+');
@@ -15,4 +16,4 @@ export const ComputationPercentageHistory = ({ answers }) => {
             <div className="multiplication">Multiplication: <PercentageTotalResult answers={product}/></div>
         </>
     );
-};
+});

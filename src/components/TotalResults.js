@@ -1,7 +1,8 @@
 import React from 'react';
 import {isCorrect} from '../services/competitionHelper';
+import {observer} from "mobx-react";
 
-export const TotalResults = ({ answers }) => {
+export const TotalResults = observer(({ answers }) => {
 
     const correct = answers.filter(isCorrect).length;
     const total = answers.length;
@@ -10,4 +11,4 @@ export const TotalResults = ({ answers }) => {
         ? <div className="total-result">{correct} / {total}</div>
         : null
     ;
-};
+});

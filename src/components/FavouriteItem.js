@@ -1,7 +1,8 @@
 import React from 'react';
 import { correctAnswer, isCorrect } from "../services/competitionHelper";
+import {observer} from "mobx-react";
 
-export const FavouriteItem = ({item}) => {
+export const FavouriteItem = observer(({item}) => {
     const correct = isCorrect(item);
 
     return (
@@ -14,4 +15,4 @@ export const FavouriteItem = ({item}) => {
             <span className="correct-answer">{correctAnswer(item)}</span>
         </div>
     );
-};
+});
