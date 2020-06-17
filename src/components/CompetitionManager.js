@@ -58,7 +58,7 @@ const useAnswers = (answers, loading) => {
     const deleteAnswer = async id => {
         loading.push(true);
         const resultId = await api.deleteAnswer(id);
-        answers.splice(answers.findIndex(item => item.id === resultId), 0);
+        answers.splice(answers.findIndex(item => item.id === resultId), 1);
         loading.pop();
     };
     return [answers, addAnswer, deleteAnswer];
@@ -74,7 +74,7 @@ const useFavourites = (favourites, loading) => {
     const removeLike = async id => {
         loading.push(true);
         const resultId = await api.unlike(id);
-        favourites.splice(favourites.findIndex(item => item.id === resultId), 0);
+        favourites.splice(favourites.findIndex(item => item.id === resultId), 1);
         loading.pop();
     };
 
