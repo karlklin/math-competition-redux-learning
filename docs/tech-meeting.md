@@ -1,12 +1,15 @@
 # What's MobX?
 - state management library that implements reactive programming
 - simple, scalable and battle tested
+
 https://github.com/mobxjs/mobx/issues/681 (Netflix, Amazon Web Services, Cypress.io)
+- around 10-50k of LOC but also 150k of LOC Raken
+
 - mentioned on state of js
 https://2019.stateofjs.com/data-layer/
 
-## How it works?
-    ![MobX Flow](https://mobx.js.org/assets/flow.png "MobX flow")
+![MobX Flow](https://mobx.js.org/assets/flow.png "MobX flow")
+
 
 ## Concepts:
 - actions
