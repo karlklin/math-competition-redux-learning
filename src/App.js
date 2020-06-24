@@ -3,13 +3,13 @@ import {CompetitionManager} from './components/CompetitionManager';
 
 import './styles.scss';
 import '@fortawesome/fontawesome-free/css/all.css'
-import {StateContextProvide} from './state/AnswerContext';
+import {StateContextProvider} from './state/AnswerContext';
 
 function App() {
   return (
-      <StateContextProvide>
+      <StateContextProvider>
         <CompetitionManager />
-      </StateContextProvide>
+      </StateContextProvider>
   );
 }
 

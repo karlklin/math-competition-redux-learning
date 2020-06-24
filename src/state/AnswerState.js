@@ -1,4 +1,4 @@
-import {computed, observable} from 'mobx';
+import {action, computed, observable, runInAction} from 'mobx';
 import {api} from '../services/api';
 
 export class AnswerState {
@@ -28,31 +28,45 @@ export class AnswerState {
     return this.answers.filter(item => item.operator === '*');
   }
 
-  addAnswer = async answer => {
+  @action addAnswer = async answer => {
     this.loading.push(true);
     const resultAnswer = await api.addAnswer(answer);
-    this.answers.push(resultAnswer);
-    this.loading.pop();
+    runInAction(() => {
+      this.answers.push(resultAnswer);
+      this.loading.pop();
+    });
   };
 
-  deleteAnswer = async id => {
+  @action deleteAnswer = async id => {
     this.loading.push(true);
     const resultId = await api.deleteAnswer(id);
-    this.answers.splice(this.answers.findIndex(item => item.id === resultId), 1);
-    this.loading.pop();
+    runInAction(() => {
+      this.answers.splice(this.answers.findIndex(item => item.id === resultId), 1);
+      this.loading.pop();
+    });
   };
 
-  addLike = async answer => {
+  @action addLike = async answer => {
     this.loading.push(true);
     const resultAnswer = await api.like(answer);
+    this.addFavourites(resultAnswer);
+    this.popLoading();
+  };
+
+  @action addFavourites = resultAnswer => {
     this.favourites.push(resultAnswer);
+  };
+
+  @action popLoading = () => {
     this.loading.pop();
   };
 
-  removeLike = async id => {
+  @action removeLike = async id => {
     this.loading.push(true);
     const resultId = await api.unlike(id);
-    this.favourites.splice(this.favourites.findIndex(item => item.id === resultId), 1);
-    this.loading.pop();
+    runInAction(() => {
+      this.favourites.splice(this.favourites.findIndex(item => item.id === resultId), 1);
+      this.loading.pop();
+    });
   };
 }
