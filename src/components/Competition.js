@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import {useStateContext} from '../state/AnswerContext';
 
-export const Competition = ({ addAnswer, difficulty }) => {
+export const Competition = ({ difficulty }) => {
+    const { addAnswer } = useStateContext();
     const [data, setData] = useState(newCompetition(difficulty));
 
     const submit = e => {

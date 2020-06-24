@@ -1,8 +1,10 @@
 import React from 'react';
 import {HistoryLogItem} from './HistoryLogItem';
 import {observer} from "mobx-react";
+import {useStateContext} from '../state/AnswerContext';
 
-export const HistoryLog = observer(({history, favourites, deleteAnswer, addLike, removeLike}) => {
+export const HistoryLog = observer(() => {
+    const {answers: history, favourites, deleteAnswer, addLike, removeLike} = useStateContext()
     const isLike = id => !!favourites.find(fav => fav.id === id);
 
     return (

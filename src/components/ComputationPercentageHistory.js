@@ -1,19 +1,16 @@
 import React from 'react';
 import {PercentageTotalResult} from './PercentageTotalResult';
 import {observer} from "mobx-react";
+import {useStateContext} from '../state/AnswerContext';
 
 export const ComputationPercentageHistory = observer(({ answers }) => {
-    const filterBy = op => answers.filter(item => item.operator === op);
-
-    const total = filterBy('+');
-    const difference = filterBy('-');
-    const product = filterBy('*');
+    const { diffAnswers, sumAnswers, productAnswers } = useStateContext();
 
     return (
         <>
-            <div className="adding">Adding: <PercentageTotalResult answers={total}/></div>
-            <div className="substracting">Substracting: <PercentageTotalResult answers={difference}/></div>
-            <div className="multiplication">Multiplication: <PercentageTotalResult answers={product}/></div>
+            <div className="adding">Adding: <PercentageTotalResult answers={sumAnswers}/></div>
+            <div className="substracting">Substracting: <PercentageTotalResult answers={diffAnswers}/></div>
+            <div className="multiplication">Multiplication: <PercentageTotalResult answers={productAnswers}/></div>
         </>
     );
 });

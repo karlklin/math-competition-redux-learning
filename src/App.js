@@ -3,12 +3,13 @@ import {CompetitionManager} from './components/CompetitionManager';
 
 import './styles.scss';
 import '@fortawesome/fontawesome-free/css/all.css'
+import {StateContextProvide} from './state/AnswerContext';
 
 function App() {
   return (
-      <React.Fragment>
+      <StateContextProvide>
         <CompetitionManager />
-      </React.Fragment>
+      </StateContextProvide>
   );
 }
 
