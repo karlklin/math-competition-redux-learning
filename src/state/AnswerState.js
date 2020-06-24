@@ -1,6 +1,5 @@
 import {computed, observable} from 'mobx';
 import {api} from '../services/api';
-import {isCorrect} from '../services/competitionHelper';
 
 export class AnswerState {
   @observable answers = [
