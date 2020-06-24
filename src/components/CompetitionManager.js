@@ -7,6 +7,9 @@ import {Favourites} from './Favourites';
 import {Loading} from './Loading';
 import {PageTitle} from './PageTitle';
 import {Difficulty} from './Difficulty';
+import {logAnswerState} from '../logger/Logger';
+
+logAnswerState();
 
 export const CompetitionManager = () => {
     const [difficulty, updateDifficulty, difficulties] = useDifficulties(5);

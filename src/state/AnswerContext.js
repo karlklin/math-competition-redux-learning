@@ -6,7 +6,7 @@ configure({
   enforceActions: 'observed'
 });
 
-const state = new AnswerState();
+export const state = new AnswerState();
 const StateContext = React.createContext(null);
 
 export const StateContextProvider = ({ children }) => {
