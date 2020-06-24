@@ -32,9 +32,9 @@ export const CompetitionManager = () => {
 const useDifficulties = initial => {
     const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const [difficulty, setDifficulty] = useState(initial);
-    const updateDifficulty = num => e => {
+    const updateDifficulty = num => {
+        // more logic here
         setDifficulty(num);
-        e.preventDefault();
     };
 
     return [difficulty, updateDifficulty, difficulties]
