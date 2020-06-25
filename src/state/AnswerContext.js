@@ -1,10 +1,5 @@
 import React, {useContext} from 'react';
 import {AnswerState} from './AnswerState';
-import {configure} from 'mobx'
-
-configure({
-  enforceActions: 'observed'
-});
 
 export const state = new AnswerState();
 const StateContext = React.createContext(null);
