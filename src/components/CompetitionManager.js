@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Header} from './Header';
 import {Competition} from './Competition';
 import {PercentageHistory} from './PercentageHistory';
@@ -8,20 +8,20 @@ import {Loading} from './Loading';
 import {PageTitle} from './PageTitle';
 import {Difficulty} from './Difficulty';
 import {logAnswerState} from '../logger/Logger';
+import {action} from "mobx";
+import {useLocalStore} from "mobx-react";
 
 logAnswerState();
 
 export const CompetitionManager = () => {
-    const [difficulty, updateDifficulty, difficulties] = useDifficulties(5);
+    const difficultyState = useDifficulties(5);
 
     return (
         <div>
-            <Difficulty difficulty={difficulty}
-                        updateDifficulty={updateDifficulty}
-                        difficulties={difficulties}/>
+            <Difficulty difficultyState={difficultyState}/>
             <div className="container">
                 <Header />
-                <Competition difficulty={difficulty} />
+                <Competition difficultyState={difficultyState}/>
                 <PercentageHistory />
                 <HistoryLog />
                 <Favourites />
@@ -33,12 +33,14 @@ export const CompetitionManager = () => {
 };
 
 const useDifficulties = initial => {
-    const difficulties = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const [difficulty, setDifficulty] = useState(initial);
-    const updateDifficulty = num => {
-        // more logic here
-        setDifficulty(num);
-    };
+    const difficultyState = useLocalStore(() => ({
+        difficulties: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        difficulty: initial,
+        updateDifficulty: action(function (num)  {
+            // more logic here
+            this.difficulty = num;
+        })
+    }));
 
-    return [difficulty, updateDifficulty, difficulties]
+    return difficultyState;
 }

@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {useStateContext} from '../state/AnswerContext';
+import {observer, useLocalStore} from 'mobx-react';
+import {action} from "mobx";
 
-export const Competition = ({ difficulty }) => {
-    const { addAnswer } = useStateContext();
-    const [data, setData] = useState(newCompetition(difficulty));
+export const Competition = observer(({difficultyState}) => {
+    const {addAnswer} = useStateContext();
+
+    // const difficultyState = useAsObservableSource({difficulty});
+    const {data, nextData} = useLocalStore(() => ({
+        data: newCompetition(difficultyState.difficulty),
+        nextData: action(function () {
+            this.data = newCompetition(difficultyState.difficulty);
+        })
+    }));
 
     const submit = e => {
-        if(e.key === 'Enter' && e.target.value !== '') {
+        if (e.key === 'Enter' && e.target.value !== '') {
             addAnswer({...data, answer: parseInt(e.target.value, 10)});
-            setData(newCompetition(difficulty));
+            nextData();
             e.target.value = '';
         }
     };
@@ -19,10 +28,10 @@ export const Competition = ({ difficulty }) => {
             <span className="operator">{data.operator}</span>
             <span className="b">{data.b}</span>
             <span className="equal">=</span>
-            <input type="number" onKeyPress={submit} />
+            <input type="number" onKeyPress={submit}/>
         </div>
     );
-};
+});
 
 const newCompetition = (difficulty = 10) => {
     const operators = ['+', '-', '*'];
