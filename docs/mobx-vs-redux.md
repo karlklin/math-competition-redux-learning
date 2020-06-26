@@ -1,10 +1,10 @@
-# Learning curve 
+# Learning curve
 
-# Boilerplate 
+# Boilerplate
 
-# Community 
+# Community
 
-# Performance 
+# Performance
 
 # React integration 
 
@@ -13,3 +13,5 @@
 # Testability 
 
 # Maintainability 
+
+# Side-side rendering
